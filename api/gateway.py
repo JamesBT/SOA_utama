@@ -36,7 +36,7 @@ class GatewayService:
 #   email (string)
 #   jenis (int) (user biasa (1)/admin(2)/perhotelan(3)/dkk)
 #   password
-#   request acc forgot (bool)
-#   request forgot (date + time)
-#   request acc delete (bool)
-#   request delete (date + time) -> 3 hari setelah lewat = delete
+#   request_acc_forgot (bool) (0 -> tidak ada, 1 -> ada)
+#   request_forgot_date (date) -> lebih dari 1 minggu ditolak
+#   request_acc_delete (bool)
+#   request_delete_date (date) -> 3 hari setelah lewat = delete
