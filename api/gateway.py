@@ -35,7 +35,12 @@ class GatewayService:
 #   username (string)
 #   email (string)
 #   jenis (int) (user biasa (1)/admin(2)/perhotelan(3)/dkk)
-#   password
+#   password (string)
+#   tgl_ultah (date)
+#   no_telp (string?)
+#   gender (int) (laki (1)/wanita (2)/dll (3))
+#   kota (string)
+#   negara (string)
 #   request_acc_forgot (bool) (0 -> tidak ada, 1 -> ada)
 #   request_forgot_date (date) -> lebih dari 1 minggu ditolak
 #   request_acc_delete (bool)
