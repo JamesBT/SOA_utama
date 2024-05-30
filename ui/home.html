@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/home.css">
+    <title>Language and Currency Selection</title>
 </head>
 
 <body>
@@ -21,25 +22,86 @@
     </div>
 
     <div id="languagePopup" class="popup-container">
-        <h3>Select Language and Currency</h3>
-        <label for="language">Language:</label>
-        <select id="language">
-            <option value="en">English</option>
-            <option value="id">Bahasa Indonesia</option>
-            <!-- Add more language options as needed -->
-        </select>
-        <br>
-        <label for="currency">Currency:</label>
-        <select id="currency">
-            <option value="USD">USD</option>
-            <option value="IDR">IDR</option>
-            <!-- Add more currency options as needed -->
-        </select>
-        <br>
-        <button onclick="applySelection()">Apply</button>
+        <div class="popup-content">
+            <div class="left-side">
+                <label>Language:</label>
+                <div class="button-list">
+                    <button onclick="selectLanguage('EN')">English</button>
+                    <button onclick="selectLanguage('ID')">Bahasa Indonesia</button>
+                    <button onclick="selectLanguage('ID')">Bahasa Indonesia</button>
+                    <button onclick="selectLanguage('ID')">Bahasa Indonesia</button>
+                    <button onclick="selectLanguage('ID')">Bahasa Indonesia</button>
+                    <button onclick="selectLanguage('ID')">Bahasa Indonesia</button>
+                    <button onclick="selectLanguage('ID')">Bahasa Indonesia</button>
+                    <button onclick="selectLanguage('ID')">Bahasa Indonesia</button>
+                    <button onclick="selectLanguage('ID')">Bahasa Indonesia</button>
+                    <button onclick="selectLanguage('ID')">Bahasa Indonesia</button>
+                    <button onclick="selectLanguage('ID')">Bahasa Indonesia</button>
+                    <button onclick="selectLanguage('ID')">Bahasa Indonesia</button>
+                    <button onclick="selectLanguage('ID')">Bahasa Indonesia</button>
+                    <button onclick="selectLanguage('ID')">Bahasa Indonesia</button>
+                    <button onclick="selectLanguage('ID')">Bahasa Indonesia</button>
+                    <button onclick="selectLanguage('ID')">Bahasa Indonesia</button>
+                    <button onclick="selectLanguage('ID')">Bahasa Indonesia</button>
+                    <!-- Add more language buttons as needed -->
+                </div>
+            </div>
+            <div class="right-side">
+                <label>Currency:</label>
+                <div class="button-list">
+                    <button onclick="selectCurrency('USD')">USD</button>
+                    <button onclick="selectCurrency('IDR')">IDR</button>
+                    <!-- Add more currency buttons as needed -->
+                </div>
+                <div class="apply-button-container">
+                    <button onclick="applySelection()">Apply</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="js/home.js"></script>
 
+    <script>
+        let selectedLanguage = 'EN';
+        let selectedCurrency = 'USD';
+
+        window.showPopup = function () {
+            const popup = document.getElementById('languagePopup');
+            if (popup) {
+                popup.style.display = 'block';
+            } else {
+                console.error('Popup element not found.');
+            }
+        };
+
+        window.selectLanguage = function (language) {
+            selectedLanguage = language;
+            document.querySelectorAll('.left-side .button-list button').forEach(button => {
+                button.classList.remove('selected');
+            });
+            document.querySelector(`.left-side .button-list button[onclick="selectLanguage('${language}')"]`).classList.add('selected');
+        };
+
+        window.selectCurrency = function (currency) {
+            selectedCurrency = currency;
+            document.querySelectorAll('.right-side .button-list button').forEach(button => {
+                button.classList.remove('selected');
+            });
+            document.querySelector(`.right-side .button-list button[onclick="selectCurrency('${currency}')"]`).classList.add('selected');
+        };
+
+        window.applySelection = function () {
+            // Update header content based on selected language and currency
+            document.querySelector('.language_option').innerText = `${selectedLanguage} | ${selectedCurrency}`;
+
+            // Hide the popup
+            const popup = document.getElementById('languagePopup');
+            if (popup) {
+                popup.style.display = 'none';
+            } else {
+                console.error('Popup element not found.');
+            }
+        };
+    </script>
 </body>
 
 </html>

@@ -1,3 +1,5 @@
+
+/* ========================================= HEADER ================================================== */
 .center-header {
   display: flex;
   justify-content: center;
@@ -8,7 +10,7 @@
   overflow: hidden;
   background-color: #f1f1f1;
   padding: 20px 10px;
-  min-width: 1020px;
+  min-width: 77.5%;
 }
 
 /* Style the header links */
@@ -23,7 +25,7 @@
   border-radius: 4px;
 }
 
-/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+/* Style the logo link */
 .header a.logo {
   font-size: 25px;
   font-weight: bold;
@@ -35,7 +37,7 @@
   color: black;
 }
 
-/* Style the active/current link*/
+/* Style the active/current link */
 .header a.active {
   background-color: dodgerblue;
   color: white;
@@ -46,7 +48,7 @@
   float: right;
 }
 
-/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+/* Add media queries for responsiveness */
 @media screen and (max-width: 500px) {
   .header a {
     float: none;
@@ -58,6 +60,8 @@
   }
 }
 
+/* ========================================= POP UP LANGUAGE ================================================== */
+/* Popup styling */
 .popup-container {
   display: none;
   position: absolute;
@@ -65,7 +69,69 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
+  width: 40%;
+  height: 70%;
+  max-width: 500px;
+  max-height: 360px;
   padding: 20px;
   border: 1px solid #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.popup-content {
+  display: flex;
+  justify-content: space-between;
+  height: 100%; /* Adjust to accommodate the padding */
+}
+
+.left-side,
+.right-side {
+  flex: 1;
+  margin: 0 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.left-side {
+  overflow-y: auto; /* Makes only the left side scrollable */
+  max-height: calc(100%-30px); /* Ensure it doesn't overflow its container */
+}
+
+.left-side label,
+.right-side label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.button-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Adds space between buttons */
+}
+
+.button-list button {
+  width: 100%;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  cursor: pointer;
+  transition: border-radius 0.3s, background-color 0.3s;
+}
+
+.button-list button.selected {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.button-list button:hover {
+  background-color: #f2f3f3;
+  border-radius: 15px;
+}
+
+.apply-button-container {
+  margin-top: auto; /* Push the button to the bottom */
+  text-align: right;
+  padding-top: 10px; /* Add some space above the button */
 }
