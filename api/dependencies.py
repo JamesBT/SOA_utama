@@ -13,7 +13,7 @@ class DatabaseWrapper:
         self.connection = connection
 
     # buat user baru - sign up
-    def create_user(self,username,name,gmail,password, tgl_ultah, no_telp, gender, kota, negara):
+    def create_user(self,username,name,gmail,tgl_ultah,no_telp,gender,kota,negara,password):
         cursor = self.connection.cursor(dictionary=True)
         try:
             # cek username + gmail
@@ -251,9 +251,38 @@ class DatabaseWrapper:
         finally:
             cursor.close()
 
+    # verif berdasarkan nama
+    def verif_user_name(self,name):
+        cursor = self.connection.cursor(dictionary=True)
+        try:
+            # cek username + gmail
+            sql = "SELECT username FROM user WHERE name = {}"
+            cursor.execute(sql, (name))
+            existing_user = cursor.fetchone()
+            if existing_user:
+                # tidak ada username atau gmail yang terdaftar
+                return 400, {
+                    "status":"Failed",
+                    "detail":f"No user registered with name {name}",
+                    "code":400
+                }
+            else:
+                # username ada terdaftar 
+                return 200, {
+                    "status":"Success",
+                    "detail":f"User is registered",
+                    "code":400
+                }
+        except Exception as e:
+            return 400, {
+                "status": "Failed",
+                "detail": f"Error getting user: {str(e)}",
+                "code": 400
+            }
+        finally:
+            cursor.close()
+
     # delete user
-
-
 
     def __del__(self):
         self.connection.close()
