@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+    font-size: 62.5%;
+    font-size: 15px;
+    background-image: url(https://images.unsplash.com/photo-1573126617899-41f1dffb196c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+}
+
+/* =============================================== HOME ======================================================= */
+.main-content{
+    padding-top: 140px;
+}
+
+.home-text h1{
+    font-size: 40px;
+    text-align: center;
+    overflow: hidden;
+    padding: 10px
+}
+
+.tab-service {
+  padding-bottom: 30px;
+  height: 65px;
+  display: inline-block;
+  white-space: nowrap;
+  border-bottom: 1px solid #111;
+}
+
+.tab-service button {
+  margin-left: 38px;
+  margin-right: 2rem;
+  padding-left: 50px;
+  padding-right: 3rem;
+  border: none;
+  background: none;
+  color: #111;
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  line-height: 80px;
+}
+
+.tab-service button:hover {
+  border: 1px solid #111;
+  border-radius: 30px;
+}

@@ -1,0 +1,104 @@
+div.log-modal {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform:translate(-50%,-50%);
+    width:700px;
+    z-index: 1002;
+  }
+
+div.login-modal-cnt {
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    margin: 15% auto;
+    padding: 30px;
+    width: 80%;
+    max-height: 600px;
+    border-radius: 10px;
+}
+
+span.login-title{
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.validate-input{
+    padding-top:20px
+}
+
+.input-label{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+p {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+input[type=text].input-txt {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid rgba(0, 0, 0, 0.368);
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 20px;
+  }
+
+button.submit-btn {
+    width: 100%;
+    background-color: dodgerblue;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+div.oth-login{
+    display: block;
+    align-items: center;
+}
+
+div.oth-login button{
+    width: 100%;
+    margin-top:10px;
+    margin-bottom: 10px;
+    padding:15px;
+    background-color: white;
+    align-items: center;
+    border: 1px solid rgba(30, 143, 255, 0.553);
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+p a{
+    color:dodgerblue;
+    text-decoration: none;
+}
+
+.login-close {
+    color: #aaa;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+.login-close:hover,
+.login-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
