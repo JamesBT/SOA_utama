@@ -13,29 +13,59 @@ body {
 /* =============================================== HOME ======================================================= */
 .main-content{
     padding-top: 140px;
+    margin: 0;
+}
+
+.container-fluid{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.home-content{
+  margin: 0;
+  padding-bottom: 250px;
+  padding-top: 70px;
 }
 
 .home-text h1{
     font-size: 40px;
     text-align: center;
     overflow: hidden;
-    padding: 10px
+    padding: 10px;
+}
+
+.search-bar{
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 40px;
+}
+
+.input-search{
+  width: 40%;
+  padding: 20px 30px 20px 30px;
+  border: 2px solid black;
+  border-radius: 50px;
+  font-size: 35px;
+  font-family: inherit;
 }
 
 .tab-service {
-  padding-bottom: 30px;
+  width: 100% !important;
+  padding: 50px 0 50px 0;
   height: 65px;
   display: inline-block;
   white-space: nowrap;
-  border-bottom: 1px solid #111;
+  text-align: center;
 }
 
 .tab-service button {
-  margin-left: 38px;
+  margin-left: 33px;
   margin-right: 2rem;
-  padding-left: 50px;
+  padding-left: 47px;
   padding-right: 3rem;
-  border: none;
+  border: 2px solid #111;
+  border-radius: 30px;
   background: none;
   color: #111;
   font-family: inherit;
@@ -46,6 +76,31 @@ body {
 }
 
 .tab-service button:hover {
-  border: 1px solid #111;
+  background-color: white;
   border-radius: 30px;
 }
+
+/* =============================================== RECOMMEND ======================================================= */
+
+.recommend-content{
+  padding: 20px 0 50px 0;
+  border-radius: 50px 50px 0 0;
+  background-color: white;
+}
+
+.promo-text h1 {
+  margin: 30px 0 30px 40px;
+}
+
+.promo-img {
+  margin: 30px 40px 30px 40px;
+}
+
+.promo-img img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+

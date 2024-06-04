@@ -1,13 +1,24 @@
-<?php include('login.php')?>
+<?php 
+
+session_start();
+if (isset ($_SESSION['username']) && isset($_SESSION['email']) && isset($_SESSION['loggedin'])){
+  $username = $_SESSION['username'];
+  $email = $_SESSION['email'];
+  $login = $_SESSION['loggedin'];
+}else{
+  include('login.php');
+}
+
+?>
 
 <nav class="nav">
     <div class="nav-container">
         <div id="header" class="header">
             <div class="header-title">
-                <a href="#">Company</a>
+                <a href="home.php">Company</a>
             </div>
 
-            <div id="headerList" class="header-list">
+            <div id="headerList" class="header-list ml-auto">
                 <ul class="headlinks">
                     <li><a href="#" id="lang-modal" class="language-opt">ID | IDR</a></li>
                     <li><a href="#">Promo</a></li>
@@ -19,26 +30,32 @@
                         </div>
                     </li>
                     <li><a href="#">Pesanan</a></li>
-                    <li><a id="login-btn-modal" class="outline" href="#">Login</a></li>
-                    <li><a id="signup-btn-modal" class="active" href="#">Daftar</a></li>
+                    <?php if (isset($login) && $login) : ?>
+                    <li class="dropdown">
+                      <a id="profileButton" href="#" onclick="showProfileDropdown(event)">Profile</a>
+                        <div class="profile-dropdown">
+                            <div class="profile-account">
+                                <a class="profile" href="#"><?php echo $username; ?></a>
+                            </div>
+                            <div class="profile-dr-content">
+                                <a href="bar_profile.php?tab=edit_profile.php">Edit Profile</a>
+                                <a href="#">My Booking</a>
+                                <a href="#">Purchase List</a>
+                                <a href="#">Promo Info</a>
+                                <a href="bar_profile.php?tab=setting.php">Setting</a>
+                                <a href="logout.php">Log Out</a>
+                            </div>
+                        </div>
+                    </li>
+                    <?php else : ?>
+                        <li><a id="login-btn-modal" class="outline" href="#">Login</a></li>
+                        <li><a id="signup-btn-modal" class="active" href="#">Daftar</a></li>
+                    <?php endif; ?>
                     <li>
                         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                             <i class="fas fa-bars">YES</i>
                         </a>
                     </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="navlinks">
-            <div id="mainListDiv" class="main-list">
-                <ul class="navlinks">
-                    <li><a href="#">Hotel</a></li>
-                    <li><a href="#">Tiket Pesawat</a></li>
-                    <li><a href="#">Rental Mobil</a></li>
-                    <li><a href="#">Atraksi dan Aktivitas</a></li>
-                    <li><a href="#">Paket Travel</a></li>
-                    <li><a href="#">Asuransi</a></li>
                 </ul>
             </div>
         </div>
@@ -138,4 +155,41 @@ function myFunction() {
   document.getElementsByClassName("login-close")[0].onclick = function() {
       document.getElementById("logModal").style.display = "none";
   }
+</script>
+
+<script>
+  function showProfileDropdown(event) {
+    event.preventDefault();
+    const profileDropdown = document.getElementsByClassName('profile-dropdown');
+    profileDropdown.classList.toggle('show');
+}
+
+function login(event){
+    document.getElementsByClassName('login-form').addEventListener('submit', function(event) {
+          event.preventDefault();
+          const email = document.getElementById('email').value;
+
+          fetch('login.php', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: new URLSearchParams({
+                  'email': email
+              })
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.status === 'success') {
+                  <?php $_SESSION['loggedin'] = true; ?>
+                  document.getElementsByClassName("login-close")[0].onclick = function() {
+                      document.getElementById("logModal").style.display = "none";
+                  }
+              } else {
+                  alert('Login failed: ' + data.message);
+              }
+          })
+          .catch(error => console.error('Error:', error));
+      });
+    }
 </script>

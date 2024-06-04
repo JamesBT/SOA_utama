@@ -2,35 +2,27 @@
 /* Navbar section */
 
 .nav {
-    width: 100%;
-    height: 65px;
-    position: fixed;
-    line-height: 65px;
-    text-align: center;
-    z-index: 1000;
-}
-
-.nav {
   width: 100%;
-  height: 65px;
   position: fixed; 
   top: 0;
   left: 0;
-  line-height: 65px;
+  padding: 15px 0 15px 0;
+  line-height: 30px;
   text-align: center;
   z-index: 1000;
+  border-bottom:2px solid rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  flex-direction: column;
 }
 
 .nav .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
 }
@@ -48,6 +40,9 @@
 
 .header-list {
   height: 65px;
+  margin-left: auto;
+  float: right;
+
 }
 
 .header-list ul {
@@ -62,7 +57,7 @@
   padding-right: 1rem;
 }
 
-.main-list {
+/* .main-list {
   height: 65px;
   position: fixed; 
   overflow: hidden;
@@ -86,7 +81,7 @@
 .main-list ul li {
   padding-left: 71px;
   padding-right: 75px;
-}
+} */
 
 .nav .header-list ul li a{
     padding: 12px 18px 12px 18px;
@@ -101,23 +96,28 @@
   font-weight: 600;
 }
 
-.nav ul li a:hover {
+.nav .header-list ul li a:hover {
   background-color: rgba(255, 255, 255, 0.256);
   border-radius: 10px;
+  border: 1px solid black;
 }
 
 .nav ul li a.active{
-    /* padding: 12px 18px 12px 18px; */
     background-color: dodgerblue;
     color: white;
     border-radius: 15px;
 }
 
 .nav ul li a.outline{
-    /* padding: 12px 18px 12px 18px; */
     border-radius: 15px;
-    color: white;
-    border: 1px solid white;
+    color: black;
+    border: 1px solid black;
+}
+
+.nav ul li a.outline:hover{
+  color: white;
+  border: 1px solid white;
+  background-color: black;
 }
 
 .icon {
@@ -134,7 +134,7 @@ li.dropdown {
   position: absolute;
   background-color: #f9f9f9;
   border-radius: 15px;
-  min-width: 160px;
+  width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1001;
 }
@@ -198,7 +198,7 @@ li.dropdown {
   justify-content: space-between;
   margin: 15% auto;
   padding: 20px;
-  width: 80%;
+  width: 90%;
   max-height: 500px;
   border-radius: 10px;
   font-size: 30px;
@@ -221,6 +221,10 @@ li.dropdown {
 .nav div.right-side {
   flex: 1; 
   margin-left: 10px;
+}
+
+.nav .button-list{
+  margin-top: 30px;
 }
 
 .nav .button-list button{
@@ -289,4 +293,54 @@ li.dropdown {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.profile-dropdown {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  width: 250px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 0;
+  text-align: left;
+  border-radius: 15px;
+}
+
+.profile-account {
+  padding: 10px 0 10px 0;
+  background-color: black;
+  color: white;
+  text-align: left;
+  border-radius: 15px 15px 0 0;
+}
+
+.profile-account .profile{
+  color: white;
+  font-size: 30px;
+}
+
+.profile-dr-content a {
+  color: black;
+  padding: 5px !important;
+  margin: 7px;
+  text-decoration: none;
+  display: block;
+}
+
+.profile-dropdown.show {
+  display: block;
+}
+
+a.profile:hover{
+  border: none;
+  background-color: transparent !important;
+}
+
+.profile-dr-content a:hover {
+  background-color: rgba(14, 2, 2, 0.162)!important;
+}
+
+.dropdown:hover .profile-dropdown {
+  display: block;
 }
