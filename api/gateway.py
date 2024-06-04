@@ -8,6 +8,32 @@ class GatewayService:
 
     user_rpc = RpcProxy('user_service')
 
+    # G -> GET
+    # P -> POST
+    # U -> PUT (UPDATE)
+    # D -> DELETE
+    
+    # G, P, U, D /user/<userId>
+    # G -> verif nama (userId)
+    # P -> buat akun (username,name,gmail,tgl_ultah,no_telp,gender,kota,negara,password)
+    # U -> update profile (tgl_ultah,no_telp,gender,kota,negara)
+    # D -> delete/disable account (userId) -> ubah status ke 0 | 1 = aktif, 0 = nonaktif
+    
+    # P /user/auth
+    # P -> login
+    
+    # P, U /user/forgot
+    # P -> request forgot pass (gmail)
+    # U -> ubah password (userID, new pass, kode_ganti_pass)
+
+# =========================================================================== /USER/ ===========================================================================
+
+    # verif nama
+    @http('GET', '/user/<int:userid>')
+    def verif_user_name(self,request,userid):
+        status_code, verif_detail = self.user_rpc.verif_user_name(userid)
+        return status_code, verif_detail
+    
     # buat akun user baru
     @http('POST','/user')
     def create_user(self, request):
@@ -22,6 +48,7 @@ class GatewayService:
         kota = json_data.get('kota')
         negara = json_data.get('negara')
         password = json_data.get('user_password')
+        print("buat user")
         status_code, create_details = self.user_rpc.create_user(username,name,gmail,tgl_ultah,no_telp,gender,kota,negara,password)
         return status_code, json.dumps(create_details)
     # contoh input:
@@ -37,47 +64,56 @@ class GatewayService:
     #     "user_password": "jeremy123456",
     # }
     
-    # ambil user dengan username/gmail tertentu
-    @http('GET', '/user/<str:input>')
-    def get_user(self,request,input):
-        status_code, user_detail = self.user_rpc.get_user(input)
+    # update profile
+    @http('PUT', '/user')
+    def update_profile(self,request,userid,name,username,tgl_ultah,no_telp,gender,kota,negara):
+        status_code, update_detail = self.user_rpc.update_profile(userid,name,username,tgl_ultah,no_telp,gender,kota,negara)
+        return status_code, update_detail
+    
+    # delete - disable account
+    @http('DELETE', '/user')
+    def delete_user(self,request,userid):
+        status_code, delete_detail = self.user_rpc.delete_acc(userid)
+        return status_code, delete_detail
+    
+# =========================================================================== /USER/AUTH ===========================================================================
+    
+    # ambil user dengan gmail tertentu
+    @http('POST', '/user/auth')
+    def get_user(self,request):
+        data = request.get_data(as_text=True)
+        json_data = json.loads(data)
+        gmail = json_data.get('email')
+        password = json_data.get('password')
+        status_code, user_detail = self.user_rpc.verif_login(gmail,password)
         return status_code, json.dumps(user_detail)
     
-    # ambil detail full user dengan username/gmail tertentu
-    @http('GET', '/user/detail/<str:input>')
-    def get_user_detail(self,request,input):
-        status_code, user_detail = self.user_rpc.get_user_detail(input)
-        return status_code, user_detail
+# =========================================================================== /USER/FORGOT ===========================================================================
     
+    # request forgot pass
+    @http('POST', '/user/forgot')
+    def request_forgot_pass(self,request):
+        data = request.get_data(as_text=True)
+        json_data = json.loads(data)
+        gmail = json_data.get('email')
+        status_code, request_detail = self.user_rpc.request_forgot_pass(gmail)
+        return status_code, request_detail
+    
+    # update password
+    @http('PUT', '/user/forgot')
+    def update_pass(self,request,gmail,password,kode_ganti_pass):
+        status_code, update_detail = self.user_rpc.update_pass(gmail,password,kode_ganti_pass)
+        return status_code, update_detail
+    
+# =========================================================================== MISC ===========================================================================
+
     # ambil semua user
     @http('GET', '/user')
     def get_all_user(self,request):
         status_code, all_user_detail = self.user_rpc.get_all_user()
         return status_code, all_user_detail
-    
-    # request forgot pass
-    @http('GET', '/user/forgot/<str:gmail>')
-    def request_forgot_pass(self,request,gmail):
-        status_code, request_detail = self.user_rpc.request_forgot_pass(gmail)
-        return status_code, request_detail
-    
-    # update password
-    @http('POST', '/user/forgot')
-    def update_pass(self,request,gmail,password):
-        status_code, update_detail = self.user_rpc.update_pass(gmail,password)
-        return status_code, update_detail
-    
-    # update profile
-    @http('POST', '/user/detail')
-    def update_profile(self,request,gmail,name,username,tgl_ultah,no_telp,gender,kota,negara):
-        status_code, update_detail = self.user_rpc.update_profile(gmail,name,username,tgl_ultah,no_telp,gender,kota,negara)
-        return status_code, update_detail
-    
-    # verif nama
-    @http('GET', '/user/verif/<str:name>')
-    def verif_user_name(self,request,name):
-        status_code, verif_detail = self.user_rpc.verif_user_name(name)
-        return status_code, verif_detail
+
+
 # notes:
 # post -> create user
 # get -> get user
@@ -89,7 +125,8 @@ class GatewayService:
 
 # database:
 # user:
-#   user_ID (auto gen dari firebase ne)
+#   user_id (auto gen dari firebase ne)
+#   user_status
 #   name (string)
 #   username (string)
 #   email (string)
@@ -102,5 +139,6 @@ class GatewayService:
 #   negara (string)
 #   request_acc_forgot (bool) (0 -> tidak ada, 1 -> ada)
 #   request_forgot_date (date) -> lebih dari 1 minggu ditolak
+#   request_forgot_code (int) -> 6 digit
 #   request_acc_delete (bool)
 #   request_delete_date (date) -> 3 hari setelah lewat = delete

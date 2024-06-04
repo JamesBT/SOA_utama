@@ -8,29 +8,42 @@ class userService:
 
     database = dependencies.Database()
 
+# =========================================================================== /USER/ ===========================================================================
+
+    # verif berdasarkan nama 
+    @rpc
+    def verif_user_name(self,userid):
+        status_code, verif_detail = self.database.verif_user_name(self,userid)
+        return status_code, verif_detail
+    
     # buat akun user baru
     @rpc
-    def create_user(self,username,name,gmail,password):
-        status_code, create_details = self.database.create_user(username,name,gmail,password)
+    def create_user(self,username,name,gmail,tgl_ultah,no_telp,gender,kota,negara,password):
+        status_code, create_details = self.database.create_user(username,name,gmail,tgl_ultah,no_telp,gender,kota,negara,password)
+        print("BUAT USER")
         return status_code, create_details
     
+    # update data profile
+    @rpc
+    def update_profile(self,userid,name,username,tgl_ultah,no_telp,gender,kota,negara):
+        status_code, update_status = self.database.update_profile(userid,name,username,tgl_ultah,no_telp,gender,kota,negara)
+        return status_code, update_status
+    
+    # delete account
+    @rpc
+    def delete_acc(self,userid):
+        status_code, update_status = self.database.delete_acc(userid)
+        return status_code, update_status
+    
+# =========================================================================== /USER/AUTH ===========================================================================    
+
     # ambil user berdasarkan gmail/username
     @rpc 
-    def get_user(self,input):
-        status_code, user_detail = self.database.get_user(input)
+    def verif_login(self,gmail,password):
+        status_code, user_detail = self.database.verif_login(input)
         return status_code, user_detail
     
-    # ambil detail full user berdasarkan gmail/username
-    @rpc 
-    def get_user_detail(self,input):
-        status_code, user_detail = self.database.get_user_detail(input)
-        return status_code, user_detail
-    
-    # ambil semua user
-    @rpc
-    def get_all_user(self):
-        status_code,all_user = self.database.get_all_user()
-        return status_code,all_user
+# =========================================================================== /USER/FORGOT ===========================================================================    
     
     # request forgot pass
     @rpc
@@ -40,17 +53,17 @@ class userService:
     
     # update password
     @rpc
-    def update_pass(self,gmail,password):
-        status_code, update_detail = self.database.update_pass(gmail,password)
+    def update_pass(self,gmail,password,kode_ganti_pass):
+        status_code, update_detail = self.database.update_pass(gmail,password,kode_ganti_pass)
         return status_code, update_detail
+
+# =========================================================================== MISC ===========================================================================    
+
+    # ambil semua user
+    @rpc
+    def get_all_user(self):
+        status_code,all_user = self.database.get_all_user()
+        return status_code,all_user
     
-    # update data profile
-    def update_profile(self,gmail,name,username,tgl_ultah,no_telp,gender,kota,negara):
-        status_code, update_status = self.database.update_profile(gmail,name,username,tgl_ultah,no_telp,gender,kota,negara)
-        return status_code, update_status
     
-    # verif berdasarkan nama 
-    def verif_user_name(self,name):
-        status_code, verif_detail = self.database.verif_user_name(self,name)
-        return status_code, verif_detail
     
