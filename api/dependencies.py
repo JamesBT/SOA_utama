@@ -5,6 +5,8 @@ import mysql.connector
 from mysql.connector import Error
 from mysql.connector import pooling
 
+import json
+
 class DatabaseWrapper:
 
     connection = None
@@ -37,18 +39,20 @@ class DatabaseWrapper:
         cursor = self.connection.cursor(dictionary=True)
         try:
             # cek username + gmail
-            sql = "SELECT * FROM user WHERE user_id = {}"
-            cursor.execute(sql, (userid,))
+            sql = str("SELECT * FROM `user` WHERE `user_id` = {}".format((userid)))
+            cursor.execute(sql)
             existing_user = cursor.fetchone()
-            if existing_user:
+            if existing_user is None:
                 # tidak ada username atau gmail yang terdaftar
                 return 400, {
                     "status":"Failed",
-                    "detail":f"No account with id : {userid}",
+                    "detail":f"No account with id : {str(userid)}",
                     "code":400
                 }
             else:
                 # username ada terdaftar 
+                # konversi ke string
+                existing_user['tgl_ultah'] = str(existing_user['tgl_ultah'])
                 return 200, existing_user
         except Exception as e:
             return 400, {
@@ -64,11 +68,10 @@ class DatabaseWrapper:
         cursor = self.connection.cursor(dictionary=True)
         try:
             # cek username + gmail
-            sql = "SELECT * FROM user WHERE username = {} OR email = {}"
-            cursor.execute(sql, (username, gmail,))
+            sql = "SELECT * FROM user WHERE username = '{}' OR email = '{}'".format(username,gmail)
+            cursor.execute(sql)
             existing_user = cursor.fetchone()
-
-            if existing_user:
+            if existing_user is not None:
                 # username/gmail sudah pernah terpakai
                 return 409, {
                     "status":"Failed",
@@ -81,16 +84,11 @@ class DatabaseWrapper:
                     cursor.execute("SELECT COUNT(*) FROM user")
                     total_records = cursor.fetchone()['COUNT(*)']
                     new_user_id = total_records + 1
-
                     # username/gmail belum pernah terpakai
-                    sql = """INSERT INTO user 
-                    (`user_id`, `user_status`, `name`, `username`, `email`, `jenis`, `password`, `tgl_ultah`, `no_telp`, `gender`, `kota`, `negara`)
-                    VALUES (%s, 1, %s, %s, %s, 1, %s, %s, %s, %s, %s, %s)"""
-                    print(sql)
-                    cursor.execute(sql, (new_user_id, name, username, gmail, password, tgl_ultah, no_telp, gender, kota, negara))
-                    print(cursor)
+                    tgl_ultah = str(tgl_ultah)
+                    sql = """INSERT INTO `user` (`user_id`, `user_status`, `name`, `username`, `email`, `jenis`, `password`, `tgl_ultah`, `no_telp`, `gender`, `kota`, `negara`) VALUES ('{}', 1, '{}', '{}', '{}', 1, '{}', '{}', '{}', '{}', '{}', '{}')""".format(new_user_id, name, username, gmail, password, tgl_ultah, no_telp, gender, kota, negara)
+                    cursor.execute(sql)
                     self.connection.commit()
-                    
                     return 200, {
                         "status":"Success",
                         "detail":f"User {username} created succesffully",
@@ -98,9 +96,9 @@ class DatabaseWrapper:
                     }
                 except Exception as e:
                     return 400, {
-                        "status":"Failed",
-                        "detail":f"Error creating user",
-                        "code":400
+                        "status": "Failed",
+                        "detail": f"Error creating user: {str(e)}",
+                        "code": 400
                     }
                 finally:
                     cursor.close()
@@ -114,28 +112,41 @@ class DatabaseWrapper:
             cursor.close()
 
     # U | /user/<userId> | update profile
-    def update_profile(self,userid,name,username,tgl_ultah,no_telp,gender,kota,negara):
+    def update_profile(self, userid, name, username, tgl_ultah, no_telp, gender, kota, negara):
+        print("masuk dependencies")
         # gmail tidak bisa diubah 
         cursor = self.connection.cursor(dictionary=True)
         try:
             # cek gmail dulu baru di update
-            sql = "SELECT * FROM user WHERE user_id = {}"
-            cursor.execute(sql, (userid))
+            sql = "SELECT * FROM user WHERE user_id = {}".format(userid)
+            cursor.execute(sql)
             user_detail = cursor.fetchone()
-            if user_detail:
+            if user_detail is None:
                 return 400, {
                     "status": "Failed",
-                    "detail": f"No user found: {str(e)}",
+                    "detail": f"No user found with ID: {userid}",
                     "code": 400
                 }
             else:
-                sql = "UPDATE user SET username = {}, name = {}, tgl_ultah = {}, no_telp = {}, gender = {}, kota = {}, negara = {} WHERE user_id = {}"
-                cursor.execute(sql, (username,name,tgl_ultah,no_telp,gender,kota,negara,userid,))
-                return 200, {
-                    "status": "Success",
-                    "detail": f"user profile updated succesfully",
-                    "code": 200
-                }
+                tgl_ultah = str(tgl_ultah)
+                sql = "UPDATE `user` SET `name` = '{}', `username` = '{}', `tgl_ultah` = '{}', `no_telp` = '{}', `gender` = '{}', `kota` = '{}', `negara` = '{}' WHERE `user`.`user_id` = {}".format(username, name, tgl_ultah, no_telp, gender, kota, negara, userid)
+                cursor2 = self.connection.cursor(dictionary=True)
+                cursor2.execute(sql)
+                if cursor2.rowcount == 0:
+                    print("Error executing SQL query:", sql)
+                    cursor2.close()
+                    return 400, {
+                        "status": "Failed",
+                        "detail": f"Error updating user profile: {str(e)}",
+                        "code": 400
+                    }
+                else:
+                    cursor2.close()
+                    return 200, {
+                        "status": "Success",
+                        "detail": "User profile updated successfully",
+                        "code": 200
+                    }
         except Exception as e:
             return 400, {
                 "status": "Failed",
@@ -313,8 +324,10 @@ class DatabaseWrapper:
         try:
             sql = "SELECT * FROM user"
             cursor.execute(sql)
-            all_user = cursor.fetchone()
-            return 200, all_user
+            all_user = cursor.fetchall()
+            for user in all_user:
+                user['tgl_ultah'] = user['tgl_ultah'].isoformat()
+            return 200, json.dumps(all_user)
         except Exception as e:
             return 400, {
                 "status": "Failed",

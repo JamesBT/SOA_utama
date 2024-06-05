@@ -13,7 +13,7 @@ class userService:
     # verif berdasarkan nama 
     @rpc
     def verif_user_name(self,userid):
-        status_code, verif_detail = self.database.verif_user_name(self,userid)
+        status_code, verif_detail = self.database.verif_user_name(userid)
         return status_code, verif_detail
     
     # buat akun user baru

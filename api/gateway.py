@@ -32,7 +32,7 @@ class GatewayService:
     @http('GET', '/user/<int:userid>')
     def verif_user_name(self,request,userid):
         status_code, verif_detail = self.user_rpc.verif_user_name(userid)
-        return status_code, verif_detail
+        return status_code, json.dumps(verif_detail)
     
     # buat akun user baru
     @http('POST','/user')
@@ -65,10 +65,28 @@ class GatewayService:
     # }
     
     # update profile
-    @http('PUT', '/user')
-    def update_profile(self,request,userid,name,username,tgl_ultah,no_telp,gender,kota,negara):
-        status_code, update_detail = self.user_rpc.update_profile(userid,name,username,tgl_ultah,no_telp,gender,kota,negara)
-        return status_code, update_detail
+    @http('PUT', '/user/<int:userid>')
+    def update_profile(self,request,userid):
+        try:
+            json_data = json.loads(request.get_data(as_text=True))
+            print(json_data)
+            name = json_data.get('user_name')
+            username = json_data.get('user_username')
+            tgl_ultah = json_data.get('tgl_ultah')
+            no_telp = json_data.get('no_telp')
+            gender = json_data.get('gender')
+            kota = json_data.get('kota')
+            negara = json_data.get('negara')
+            status_code, update_detail = self.user_rpc.update_profile(userid, name, username, tgl_ultah, no_telp, gender, kota, negara)
+            return status_code, update_detail
+        except Exception as e:
+            return 400, {
+                "status": "Failed",
+                "detail": f"Error processing JSON payload: {str(e)}",
+                "code": 400
+            }
+    # PUT /user/user123?name=John&username=john_doe&tgl_ultah=1990-01-01&no_telp=123456789&gender=male&kota=New York&negara=USA
+
     
     # delete - disable account
     @http('DELETE', '/user')
