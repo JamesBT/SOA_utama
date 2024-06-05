@@ -1,7 +1,7 @@
-<?php 
+<?php
 session_start();
 $username = $_SESSION['username'];
-$email = $_SESSION['email'];
+$email= $_SESSION['email']
 ?>
 
 <!DOCTYPE html>
@@ -13,16 +13,14 @@ $email = $_SESSION['email'];
     <title>Language and Currency Selection</title>
 </head>
 <body>
-    <?php
-    include('navbar.php');
-    ?>
+    <?php include('navbar.php'); ?>
 
     <div class="profile-main-content">
         <div class="profile-container">
             <div class="sidebar-menu">
                 <div class="bar-profile">
-                    <p class="username"><?= $_SESSION['username']; ?></p>
-                    <p class="email"><?= $_SESSION['email']; ?></p>
+                    <p class="username"><?= $username;?></p>
+                    <p class="email"><?= $email;?></p>
                 </div>
                 <div class="bar-money">
                     <ul>
@@ -32,22 +30,19 @@ $email = $_SESSION['email'];
                 </div>
                 <div class="bar-links">
                     <ul>
-                        <li><a href="?tab=edit_profile.php" class="tab-link" data-tab="edit_profile.php" onclick="clicked('account')">Account</a></li>
+                        <li><a href="?tab=edit_profile.php" class="tab-link" data-tab="edit_profile.php" onclick="clicked('profile')">Account</a></li>
                         <li><a href="#" class="tab-link" data-tab="booking.php" onclick="clicked('booking')">My Booking</a></li>
                         <li><a href="#" class="tab-link" data-tab="purchase_list.php" onclick="clicked('purchase')">Purchase List</a></li>
-                        <li><a href="#" class="tab-link" data-tab="promo_info.php" onclick="clicked('promo')">Promo Info</a></li>
+                        <li><a href="#" class="tab-link" data-tab="promo_list.php" onclick="clicked('promo')">Promo List</a></li>
                         <li><a href="?tab=setting.php" class="tab-link" data-tab="setting.php" onclick="clicked('setting')">Setting</a></li>
                     </ul>
                 </div>
             </div>
 
             <div id="profile-tab-content">
-                <!-- <?php include('edit_profile.php'); ?> -->
-                <?php 
+                <?php
                 if (isset($_GET['tab'])) {
                     include($_GET['tab']);
-                } else {
-                    echo "<h2>Select an option from the sidebar.</h2>";
                 }
                 ?>
             </div>
@@ -55,9 +50,8 @@ $email = $_SESSION['email'];
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        $(document).ready(function() {
             function loadTabContent(tab) {
-                console.log("Loading tab:", tab);
                 $('#profile-tab-content').load(tab);
                 $('.tab-link').removeClass('selected');
                 $('.tab-link[data-tab="' + tab + '"]').addClass('selected');

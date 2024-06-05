@@ -31,7 +31,10 @@ $select_day = isset($_POST['day']) ? $_POST['day'] : '';
 
     <div id="acc-info" class="edit-tab-content">
         <div class="personal-data">
-            <form class="login-form" method="post" action="edit_profile.php">
+            <form class="edit-form" method="post" action="edit_profile.php">
+                <div class="personal-label">
+                    <p>Personal Data</p>
+                </div>
                 <div class="personal-input">
                     <span class="name-label">Username</span>
                     <input class="input-name" type="text" name="username" placeholder="<?php echo htmlspecialchars($username); ?>">
@@ -84,7 +87,36 @@ $select_day = isset($_POST['day']) ? $_POST['day'] : '';
     </div>
 
     <div id="pass-info" class="edit-tab-content">
-        BELUM
+        <div class="password-data">
+            <form class="pass-form" method="post" action="edit_profile.php">
+                <div class="pass-label">
+                    <h1>Change Password</h1>
+                    <button class="edit-pass-submit-btn" type="submit" name="change_password">Save</button>
+                </div>
+                <div class="pass-input">
+                    <span class="old-pass-label">Old Password</span>
+                    <input class="input-old-pass" type="text" name="old_pass">
+                </div>
+                <div class="pass-input">
+                    <span class="new-pass-label">New Password</span>
+                    <input class="input-new-pass" type="text" name="new_pass">
+                </div>
+                <div class="pass-input">
+                    <span class="confirm-pass-label">Confirm New Password</span>
+                    <input class="input-confirm-pass" type="text" name="confirm_pass">
+                </div> 
+            </form>
+        </div>
+
+        <div class="delete-acc">
+            <div class="del-label">
+                <h1>Delete Account</h1>
+                <p>Once your account is deleted, you will not be able to retrieve your data. This cannot be undone.</p>
+            </div>
+            <div class="del-button">
+            <button class="del-acc-btn" type="submit" name="delete_account">Delete</button>
+            </div>
+        </div>
     </div>
     
     
