@@ -1,11 +1,12 @@
 from nameko.extensions import DependencyProvider
-from datetime import datetime,timedelta
+from datetime import date,datetime,timedelta
 
 import mysql.connector
 from mysql.connector import Error
 from mysql.connector import pooling
 
 import json
+import random
 
 class DatabaseWrapper:
 
@@ -200,14 +201,14 @@ class DatabaseWrapper:
         cursor = self.connection.cursor(dictionary=True)
         try:
             # cek username + gmail
-            sql = "SELECT username,password FROM user WHERE email = {} AND password = {}"
-            cursor.execute(sql, (gmail,password))
+            sql = "SELECT * FROM user WHERE email = '{}' AND password = '{}'".format(gmail,password)
+            cursor.execute(sql)
             existing_user = cursor.fetchone()
-            if existing_user:
+            if existing_user is None:
                 # tidak ada username atau gmail yang terdaftar
                 return 400, {
                     "status":"Failed",
-                    "detail":f"No account registered with {input}",
+                    "detail":f"No account registered with {gmail}",
                     "code":400
                 }
             else:
@@ -228,10 +229,10 @@ class DatabaseWrapper:
     def request_forgot_pass(self,gmail):
         cursor = self.connection.cursor(dictionary=True)
         try:
-            sql = "SELECT * FROM user WHERE email = {}"
-            cursor.execute(sql, (gmail))
+            sql = "SELECT * FROM user WHERE email = '{}'".format(gmail)
+            cursor.execute(sql)
             existing_user = cursor.fetchone() 
-            if existing_user:
+            if existing_user is None:
                 # tidak ada gmail terdaftar
                 return 400, {
                     "status": "Failed",
@@ -240,8 +241,11 @@ class DatabaseWrapper:
                 }
             else:
                 # ada gmail terdaftar
-                sql = "UPDATE user SET request_acc_forgot = 1, request_forgot_date = GETDATE() WHERE gmail = {}"
-                cursor.execute(sql, (gmail))
+                today_date = str(get_today_date())
+                kode_forgot = generate_6_digit_number()
+                sql = "UPDATE user SET request_acc_forgot = 1, request_forgot_date = '{}', request_forgot_code = '{}' WHERE email = '{}'".format(today_date,kode_forgot,gmail)
+                cursor.execute(sql)
+                self.connection.commit()
                 return 200, {
                     "status": "Success",
                     "detail": f"forgot password is requested for : {gmail}",
@@ -261,10 +265,10 @@ class DatabaseWrapper:
         cursor = self.connection.cursor(dictionary=True)
         try:
             # cek gmail
-            sql = "SELECT * FROM user WHERE email = {}"
-            cursor.execute(sql, (gmail))
+            sql = "SELECT * FROM user WHERE email = '{}'".format(gmail)
+            cursor.execute(sql)
             existing_user = cursor.fetchone()
-            if existing_user:
+            if existing_user is None:
                 # tidak ada username atau gmail yang terdaftar
                 return 400, {
                     "status":"Failed",
@@ -283,7 +287,9 @@ class DatabaseWrapper:
                 else:
                     # ada request
                     # cek hari nya udah 1 minggu atau belum, > 1 minggu = tolak
-                        forgot_date = existing_user['request_forgot_date'].date()
+                        forgot_date = existing_user['request_forgot_date']
+                        if isinstance(forgot_date, str):
+                            forgot_date = datetime.strptime(forgot_date, "%Y-%m-%d").date()
                         today = datetime.now().date()
                         
                         time_dif = today - forgot_date
@@ -299,8 +305,9 @@ class DatabaseWrapper:
                             # terima forgot pass
                             # cek kode sama atau tidak
                             if existing_user["request_forgot_code"] == kode_ganti_pass:
-                                sql = "UPDATE user SET password = {}, request_acc_forgot = 0 WHERE email = {}"
-                                cursor.execute(sql, (password,gmail))
+                                sql = "UPDATE user SET password = '{}', request_acc_forgot = NULL, request_forgot_date = NULL, request_forgot_code = NULL WHERE email = '{}'".format(password,gmail)
+                                cursor.execute(sql)
+                                self.connection.commit()
                                 return 200, {
                                     "status":"Success",
                                     "detail":f"Password succesfully change for username {existing_user['username']}",
@@ -365,3 +372,10 @@ class Database(DependencyProvider):
 
     def get_dependency(self, worker_ctx):
         return DatabaseWrapper(self.connection_pool.get_connection())
+
+def get_today_date():
+    today = date.today()
+    return today.strftime("%Y-%m-%d")
+
+def generate_6_digit_number():
+    return random.randint(100000,999999)

@@ -40,7 +40,7 @@ class userService:
     # ambil user berdasarkan gmail/username
     @rpc 
     def verif_login(self,gmail,password):
-        status_code, user_detail = self.database.verif_login(input)
+        status_code, user_detail = self.database.verif_login(gmail,password)
         return status_code, user_detail
     
 # =========================================================================== /USER/FORGOT ===========================================================================    

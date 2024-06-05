@@ -2,6 +2,7 @@ import json
 
 from nameko.rpc import RpcProxy
 from nameko.web.handlers import http
+from datetime import date
 
 class GatewayService:
     name = 'gateway'
@@ -104,6 +105,11 @@ class GatewayService:
         gmail = json_data.get('email')
         password = json_data.get('password')
         status_code, user_detail = self.user_rpc.verif_login(gmail,password)
+        
+        
+        for key, value in user_detail.items():
+            if isinstance(value, date):
+                user_detail[key] = value.isoformat()
         return status_code, json.dumps(user_detail)
     
 # =========================================================================== /USER/FORGOT ===========================================================================
@@ -115,13 +121,18 @@ class GatewayService:
         json_data = json.loads(data)
         gmail = json_data.get('email')
         status_code, request_detail = self.user_rpc.request_forgot_pass(gmail)
-        return status_code, request_detail
+        return status_code, json.dumps(request_detail)
     
     # update password
     @http('PUT', '/user/forgot')
-    def update_pass(self,request,gmail,password,kode_ganti_pass):
+    def update_pass(self,request):
+        data = request.get_data(as_text=True)
+        json_data = json.loads(data)
+        gmail = json_data.get('email')
+        password = json_data.get('password')
+        kode_ganti_pass = json_data.get('kode_ganti_pass')
         status_code, update_detail = self.user_rpc.update_pass(gmail,password,kode_ganti_pass)
-        return status_code, update_detail
+        return status_code, json.dumps(update_detail)
     
 # =========================================================================== MISC ===========================================================================
 
