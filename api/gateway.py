@@ -78,7 +78,7 @@ class GatewayService:
             kota = json_data.get('kota')
             negara = json_data.get('negara')
             status_code, update_detail = self.user_rpc.update_profile(userid, name, username, tgl_ultah, no_telp, gender, kota, negara)
-            return status_code, update_detail
+            return status_code, json.dumps(update_detail)
         except Exception as e:
             return 400, {
                 "status": "Failed",
@@ -89,10 +89,10 @@ class GatewayService:
 
     
     # delete - disable account
-    @http('DELETE', '/user')
+    @http('DELETE', '/user/<int:userid>')
     def delete_user(self,request,userid):
         status_code, delete_detail = self.user_rpc.delete_acc(userid)
-        return status_code, delete_detail
+        return status_code, json.dumps(delete_detail)
     
 # =========================================================================== /USER/AUTH ===========================================================================
     

@@ -113,7 +113,6 @@ class DatabaseWrapper:
 
     # U | /user/<userId> | update profile
     def update_profile(self, userid, name, username, tgl_ultah, no_telp, gender, kota, negara):
-        print("masuk dependencies")
         # gmail tidak bisa diubah 
         cursor = self.connection.cursor(dictionary=True)
         try:
@@ -129,23 +128,28 @@ class DatabaseWrapper:
                 }
             else:
                 tgl_ultah = str(tgl_ultah)
-                sql = "UPDATE `user` SET `name` = '{}', `username` = '{}', `tgl_ultah` = '{}', `no_telp` = '{}', `gender` = '{}', `kota` = '{}', `negara` = '{}' WHERE `user`.`user_id` = {}".format(username, name, tgl_ultah, no_telp, gender, kota, negara, userid)
-                cursor2 = self.connection.cursor(dictionary=True)
-                cursor2.execute(sql)
-                if cursor2.rowcount == 0:
-                    print("Error executing SQL query:", sql)
-                    cursor2.close()
+                sql2 = "UPDATE `user` SET `name` = '{}', `username` = '{}', `tgl_ultah` = '{}', `no_telp` = '{}', `gender` = '{}', `kota` = '{}', `negara` = '{}' WHERE `user`.`user_id` = {};".format(username, name, tgl_ultah, no_telp, gender, kota, negara, userid)
+                try:
+                    cursor.execute(sql2)
+                    self.connection.commit()
+                    
+                    if cursor.rowcount == 0:
+                        return 400, {
+                            "status": "Failed",
+                            "detail": "No rows updated. User profile might not exist.",
+                            "code": 400
+                        }
+                    else:
+                        return 200, {
+                            "status": "Success",
+                            "detail": "User profile updated successfully",
+                            "code": 200
+                        }
+                except Exception as e:
                     return 400, {
                         "status": "Failed",
-                        "detail": f"Error updating user profile: {str(e)}",
+                        "detail": f"Error executing update SQL query: {str(e)}",
                         "code": 400
-                    }
-                else:
-                    cursor2.close()
-                    return 200, {
-                        "status": "Success",
-                        "detail": "User profile updated successfully",
-                        "code": 200
                     }
         except Exception as e:
             return 400, {
@@ -162,18 +166,19 @@ class DatabaseWrapper:
         cursor = self.connection.cursor(dictionary=True)
         try:
             # cek gmail dulu baru di update
-            sql = "SELECT * FROM user WHERE user_id = {}"
-            cursor.execute(sql, (userid))
+            sql = "SELECT * FROM user WHERE user_id = {}".format(userid)
+            cursor.execute(sql)
             user_detail = cursor.fetchone()
-            if user_detail:
+            if user_detail is None:
                 return 400, {
                     "status": "Failed",
                     "detail": f"No user found: {str(e)}",
                     "code": 400
                 }
             else:
-                sql = "UPDATE user SET user_status WHERE user_id = {}"
-                cursor.execute(sql, (0,userid,))
+                sql = "UPDATE user SET `user_status` = 0 WHERE user_id = {}".format(userid)
+                cursor.execute(sql)
+                self.connection.commit()
                 return 200, {
                     "status": "Success",
                     "detail": f"user profile updated succesfully",

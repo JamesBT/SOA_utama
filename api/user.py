@@ -32,8 +32,8 @@ class userService:
     # delete account
     @rpc
     def delete_acc(self,userid):
-        status_code, update_status = self.database.delete_acc(userid)
-        return status_code, update_status
+        status_code, delete_status = self.database.delete_acc(userid)
+        return status_code, delete_status
     
 # =========================================================================== /USER/AUTH ===========================================================================    
 
