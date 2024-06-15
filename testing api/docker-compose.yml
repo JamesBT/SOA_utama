@@ -1,0 +1,56 @@
+version: "2"
+services:
+  rabbit:
+    container_name: nameko-example-rabbitmq
+    image: rabbitmq:3.7-management
+    ports:
+      - "15673:15672" # Exposing RabbitMQ web management on different port for convenience
+    restart: always
+
+  mysql:
+    container_name: nameko-example-mysql
+    image: mysql:5.7
+    ports:
+      - "3307:3306" # Exposing MySQL on different port for convenience
+    environment:
+      MYSQL_DATABASE: "user"
+      MYSQL_ROOT_PASSWORD: "password"
+    restart: always
+
+  user:
+    container_name: nameko-example-products
+    image: nameko/nameko-example-products:latest
+    depends_on:
+      - rabbit
+      - mysql
+    ports:
+      - "8002:8000"
+    links:
+      - "rabbit:nameko-example-rabbitmq"
+      - "mysql:nameko-example-mysql"
+    environment:
+      DB_PASSWORD: "password"
+      DB_USER: "root"
+      DB_HOST: "mysql"
+      DB_NAME: "user"
+      RABBIT_PASSWORD: "guest"
+      RABBIT_USER: "guest"
+      RABBIT_HOST: "rabbit"
+      RABBIT_PORT: "5672"
+      RABBIT_MANAGEMENT_PORT: "15672"
+
+  gateway:
+    container_name: nameko-example-gateway
+    image: nameko/nameko-example-gateway:latest
+    depends_on:
+      - rabbit
+    ports:
+      - "8003:8000"
+    links:
+      - "rabbit:nameko-example-rabbitmq"
+    environment:
+      RABBIT_PASSWORD: "guest"
+      RABBIT_USER: "guest"
+      RABBIT_HOST: "rabbit"
+      RABBIT_PORT: "5672"
+      RABBIT_MANAGEMENT_PORT: "15672"
