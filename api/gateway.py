@@ -6,7 +6,11 @@ from datetime import date
 
 class GatewayService:
     name = 'gateway'
-
+    header = {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "*",
+        "Access-Control-Allow-Headers": "*",
+    }
     user_rpc = RpcProxy('user_service')
 
     # G -> GET
@@ -33,7 +37,7 @@ class GatewayService:
     @http('GET', '/user/<int:userid>')
     def verif_user_name(self,request,userid):
         status_code, verif_detail = self.user_rpc.verif_user_name(userid)
-        return status_code, json.dumps(verif_detail)
+        return status_code, self.header, json.dumps(verif_detail)
     
     # buat akun user baru
     @http('POST','/user')
@@ -51,7 +55,7 @@ class GatewayService:
         password = json_data.get('user_password')
         print("buat user")
         status_code, create_details = self.user_rpc.create_user(username,name,gmail,tgl_ultah,no_telp,gender,kota,negara,password)
-        return status_code, json.dumps(create_details)
+        return status_code, self.header, json.dumps(create_details)
     # contoh input:
     # {
     #     "user_username": "hooman",
@@ -79,7 +83,7 @@ class GatewayService:
             kota = json_data.get('kota')
             negara = json_data.get('negara')
             status_code, update_detail = self.user_rpc.update_profile(userid, name, username, tgl_ultah, no_telp, gender, kota, negara)
-            return status_code, json.dumps(update_detail)
+            return status_code, self.header, json.dumps(update_detail)
         except Exception as e:
             return 400, {
                 "status": "Failed",
@@ -93,7 +97,7 @@ class GatewayService:
     @http('DELETE', '/user/<int:userid>')
     def delete_user(self,request,userid):
         status_code, delete_detail = self.user_rpc.delete_acc(userid)
-        return status_code, json.dumps(delete_detail)
+        return status_code, self.header, json.dumps(delete_detail)
     
 # =========================================================================== /USER/AUTH ===========================================================================
     
@@ -110,7 +114,7 @@ class GatewayService:
         for key, value in user_detail.items():
             if isinstance(value, date):
                 user_detail[key] = value.isoformat()
-        return status_code, json.dumps(user_detail)
+        return status_code, self.header, json.dumps(user_detail)
     
 # =========================================================================== /USER/FORGOT ===========================================================================
     
@@ -121,7 +125,7 @@ class GatewayService:
         json_data = json.loads(data)
         gmail = json_data.get('email')
         status_code, request_detail = self.user_rpc.request_forgot_pass(gmail)
-        return status_code, json.dumps(request_detail)
+        return status_code, self.header, json.dumps(request_detail)
     
     # update password
     @http('PUT', '/user/forgot')
@@ -132,7 +136,7 @@ class GatewayService:
         password = json_data.get('password')
         kode_ganti_pass = json_data.get('kode_ganti_pass')
         status_code, update_detail = self.user_rpc.update_pass(gmail,password,kode_ganti_pass)
-        return status_code, json.dumps(update_detail)
+        return status_code, self.header, json.dumps(update_detail)
     
 # =========================================================================== MISC ===========================================================================
 
@@ -140,7 +144,7 @@ class GatewayService:
     @http('GET', '/user')
     def get_all_user(self,request):
         status_code, all_user_detail = self.user_rpc.get_all_user()
-        return status_code, all_user_detail
+        return status_code, self.header, all_user_detail
 
 
 # notes:
