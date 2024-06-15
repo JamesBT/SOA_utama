@@ -8,8 +8,9 @@ class GatewayService:
     name = 'gateway'
     header = {
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "*",
+        "Access-Control-Allow-Methods": "POST, GET, PUT, DELETE",
         "Access-Control-Allow-Headers": "*",
+        "Content-type": "application/json"
     }
     user_rpc = RpcProxy('user_service')
 
@@ -85,7 +86,7 @@ class GatewayService:
             status_code, update_detail = self.user_rpc.update_profile(userid, name, username, tgl_ultah, no_telp, gender, kota, negara)
             return status_code, self.header, json.dumps(update_detail)
         except Exception as e:
-            return 400, {
+            return 400, self.header, {
                 "status": "Failed",
                 "detail": f"Error processing JSON payload: {str(e)}",
                 "code": 400
@@ -144,7 +145,13 @@ class GatewayService:
     @http('GET', '/user')
     def get_all_user(self,request):
         status_code, all_user_detail = self.user_rpc.get_all_user()
+        print(self.header)
         return status_code, self.header, all_user_detail
+    
+    # Handle OPTIONS requests for CORS
+    @http('OPTIONS', '/user')
+    def options_user(self, request):
+        return 200, self.header, ""
 
 
 # notes:
