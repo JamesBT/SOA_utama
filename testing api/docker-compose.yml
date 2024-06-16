@@ -1,4 +1,4 @@
-version: "2"
+# version: "2"
 services:
   rabbit:
     container_name: nameko-example-rabbitmq
@@ -18,8 +18,9 @@ services:
     restart: always
 
   user:
-    container_name: nameko-example-products
-    image: nameko/nameko-example-products:latest
+    build: ./user
+    container_name: nameko-example-user
+    image: nameko/nameko-example-user:latest
     depends_on:
       - rabbit
       - mysql
@@ -40,6 +41,7 @@ services:
       RABBIT_MANAGEMENT_PORT: "15672"
 
   gateway:
+    build: ./gateway
     container_name: nameko-example-gateway
     image: nameko/nameko-example-gateway:latest
     depends_on:

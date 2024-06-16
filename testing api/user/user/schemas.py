@@ -1,6 +1,6 @@
 from marshmallow import Schema, fields
 
-class UserSchema(Schema):
+class User(Schema):
     name = fields.Str(required=True, validate=lambda s: len(s) <= 100)
     username = fields.Str(required=True, validate=lambda s: len(s) <= 100)
     email = fields.Email(required=True)
