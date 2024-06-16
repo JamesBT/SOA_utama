@@ -1,8 +1,10 @@
+TAG = latest
+
 build-image:
-	docker build -t nameko/nameko-example-gateway:$(TAG) .;
+	docker build -t nameko/nameko-example-gateway:$(TAG) ./gateway
 
 docker-tag:
-	docker tag nameko/nameko-example-gateway:$(FROM_TAG) \
+	docker tag nameko/nameko-example-gateway:$(TAG) \
 	nameko/nameko-example-gateway:$(TAG)
 
 push-image:

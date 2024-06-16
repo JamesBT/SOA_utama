@@ -17,7 +17,7 @@ ENV PATH=/appenv/bin:$PATH
 
 # Add a user and create a directory for nameko
 RUN groupadd -r nameko && useradd -r -g nameko nameko
-RUN mkdir /var/nameko/ && chown -R nameko:nameko /var/nameko/
+RUN mkdir -p /var/nameko/ && chown -R nameko:nameko /var/nameko/
 
 # Stage 2: Builder Image
 FROM base as builder
@@ -31,21 +31,26 @@ RUN apt-get update && \
 RUN pip install auditwheel
 
 # Copy the application code to the container
-COPY . /application
+WORKDIR /application
+COPY . .
 
 # Set environment variables for pip wheel directory
 ENV PIP_WHEEL_DIR=/application/wheelhouse
 ENV PIP_FIND_LINKS=/application/wheelhouse
 
 # Build the wheel
-RUN cd /application && pip wheel .
+WORKDIR /application
+RUN pip wheel .
+RUN ls /application/wheelhouse
 
 # Stage 3: Install Image
 FROM base as install
 
 COPY --from=builder /application/wheelhouse /wheelhouse
+RUN ls /wheelhouse
 
 # Install gateway service dependencies
+WORKDIR /wheelhouse
 RUN pip install --no-index -f /wheelhouse .
 
 # Stage 4: Final Service Image
@@ -53,15 +58,22 @@ FROM base as service
 
 COPY --from=install /appenv /appenv
 
-COPY gateway/config.yml /var/nameko/config.yml
-COPY gateway/run.sh /var/nameko/run.sh
+# Set working directory and copy configuration files
+RUN mkdir -p /var/nameko/
+COPY config.yml /var/nameko/config.yml
+COPY run.sh /var/nameko/run.sh
 
+# Set permissions for run.sh
 RUN chmod +x /var/nameko/run.sh
 
+# Switch to non-root user
 USER nameko
 
+# Set working directory
 WORKDIR /var/nameko/
 
+# Expose port for the service
 EXPOSE 8000
 
-CMD /var/nameko/run.sh
+# Define the command to run the service
+CMD ["/var/nameko/run.sh"]

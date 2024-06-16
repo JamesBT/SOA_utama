@@ -1,8 +1,10 @@
+TAG = latest
+
 build-image:
-	docker build -t nameko/nameko-example-user:$(TAG) .;
+	docker build -t nameko/nameko-example-user:$(TAG) ./user
 
 docker-tag:
-	docker tag nameko/nameko-example-user:$(FROM_TAG) \
+	docker tag nameko/nameko-example-user:$(TAG) \
 	nameko/nameko-example-user:$(TAG)
 
 push-image:
