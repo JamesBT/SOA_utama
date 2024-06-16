@@ -48,6 +48,9 @@ $email= $_SESSION['email']
             </div>
         </div>
     </div>
+    <?php
+    include('footer.php');
+    ?>
 
     <script>
         $(document).ready(function() {
