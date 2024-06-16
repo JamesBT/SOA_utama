@@ -35,10 +35,13 @@
                     <h1>PROMO 2024!</h1>
                 </div>
                 <div class="promo-img">
-                    <img src="assets\images\cth.jpg" class="d-block w-100" alt="...">
+                    <img src="assets\images\bannerr.jpg" class="d-block w-100" alt="...">
                 </div>
             </div>  
         </div>
     </div>
+    <?php
+    include('footer.php');
+    ?>
 </body>
 </html>

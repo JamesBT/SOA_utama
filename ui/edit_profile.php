@@ -114,7 +114,7 @@ $select_day = isset($_POST['day']) ? $_POST['day'] : '';
                 <p>Once your account is deleted, you will not be able to retrieve your data. This cannot be undone.</p>
             </div>
             <div class="del-button">
-            <button class="del-acc-btn" type="submit" name="delete_account">Delete</button>
+                <button class="del-acc-btn" type="submit" name="delete_account">Delete</button>
             </div>
         </div>
     </div>

@@ -53,7 +53,7 @@ if (isset ($_SESSION['username']) && isset($_SESSION['email']) && isset($_SESSIO
                     <?php endif; ?>
                     <li>
                         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-                            <i class="fas fa-bars">YES</i>
+                            <i class="fa fa-bars"></i>
                         </a>
                     </li>
                 </ul>
