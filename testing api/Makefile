@@ -9,11 +9,13 @@ install-dependencies:
 # docker
 
 build-base:
-	docker build --target base -t nameko-example-base .;
-	docker build --target builder -t nameko-example-builder .;
+	docker build --target base -t nameko-example-base . && \
+	docker build --target builder -t nameko-example-builder .
 
 build: build-base
-	for image in $(IMAGES) ; do TAG=$(TAG) make -C $$image build-image; done
+	for image in $(IMAGES); do \
+		TAG=$(TAG) make -C $$image build-image; \
+	done
 
 docker-save:
 	mkdir -p docker-images
@@ -23,10 +25,14 @@ docker-load:
 	docker load -i docker-images/examples.tar
 
 docker-tag:
-	for image in $(IMAGES) ; do make -C $$image docker-tag; done
+	for image in $(IMAGES); do \
+		make -C $$image docker-tag; \
+	done
 
 docker-login:
 	docker login --password=$(DOCKER_PASSWORD) --username=$(DOCKER_USERNAME)
 
-push-images:
-	for image in $(IMAGES) ; do make -C $$image push-image; done
+push-images: docker-login
+	for image in $(IMAGES); do \
+		make -C $$image push-image; \
+	done

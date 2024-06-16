@@ -1,4 +1,5 @@
-# version: "2"
+version: '3'
+
 services:
   rabbit:
     container_name: nameko-example-rabbitmq
@@ -20,7 +21,6 @@ services:
   user:
     build: ./user
     container_name: nameko-example-user
-    image: nameko/nameko-example-user:latest
     depends_on:
       - rabbit
       - mysql
@@ -30,10 +30,9 @@ services:
       - "rabbit:nameko-example-rabbitmq"
       - "mysql:nameko-example-mysql"
     environment:
-      DB_PASSWORD: "password"
-      DB_USER: "root"
-      DB_HOST: "mysql"
-      DB_NAME: "user"
+      MYSQL_PASSWORD: "password"
+      MYSQL_HOST: "mysql"
+      MYSQL_DB: "userdb"
       RABBIT_PASSWORD: "guest"
       RABBIT_USER: "guest"
       RABBIT_HOST: "rabbit"
@@ -43,7 +42,6 @@ services:
   gateway:
     build: ./gateway
     container_name: nameko-example-gateway
-    image: nameko/nameko-example-gateway:latest
     depends_on:
       - rabbit
     ports:

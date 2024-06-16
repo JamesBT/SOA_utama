@@ -1,6 +1,6 @@
 from nameko.rpc import rpc
 
-import dependencies
+from user import dependencies
 
 class userService:
 
