@@ -14,8 +14,10 @@ services:
     ports:
       - "3307:3306" # Exposing MySQL on different port for convenience
     environment:
-      MYSQL_DATABASE: "user"
+      MYSQL_DATABASE: "soa_utama"
       MYSQL_ROOT_PASSWORD: "password"
+    volumes:
+     - ./mysql-init:/docker-entrypoint-initdb.d
     restart: always
 
   user:
@@ -32,11 +34,11 @@ services:
     environment:
       MYSQL_PASSWORD: "password"
       MYSQL_HOST: "mysql"
-      MYSQL_DB: "userdb"
-      RABBIT_PASSWORD: "guest"
-      RABBIT_USER: "guest"
+      MYSQL_DB: "soa_utama"
       RABBIT_HOST: "rabbit"
       RABBIT_PORT: "5672"
+      RABBIT_USER: "guest"
+      RABBIT_PASSWORD: "guest"
       RABBIT_MANAGEMENT_PORT: "15672"
 
   gateway:
@@ -49,8 +51,8 @@ services:
     links:
       - "rabbit:nameko-example-rabbitmq"
     environment:
-      RABBIT_PASSWORD: "guest"
-      RABBIT_USER: "guest"
       RABBIT_HOST: "rabbit"
       RABBIT_PORT: "5672"
+      RABBIT_USER: "guest"
+      RABBIT_PASSWORD: "guest"
       RABBIT_MANAGEMENT_PORT: "15672"

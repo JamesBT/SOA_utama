@@ -43,13 +43,12 @@ RUN pip wheel .
 RUN ls /application/wheelhouse
 
 # Stage 3: Install Image
-FROM base as install
+FROM nameko-example-base as install
 
 COPY --from=builder /application/wheelhouse /wheelhouse
 
 # Install user service dependencies
-WORKDIR /wheelhouse
-RUN pip install --no-index -f /wheelhouse .
+RUN pip install --no-index -f /wheelhouse nameko_examples_user
 
 # Stage 4: Final Service Image
 FROM base as service

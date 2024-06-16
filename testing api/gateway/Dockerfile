@@ -6,8 +6,8 @@ RUN apt-get update && \
     apt-get install --yes curl netcat-openbsd libmariadb-dev
 
 # Upgrade pip and install virtualenv
-RUN pip3 install --upgrade pip
-RUN pip3 install virtualenv
+RUN pip install --upgrade pip && \
+    pip install virtualenv
 
 # Create a virtual environment
 RUN virtualenv -p python3 /appenv
@@ -34,28 +34,28 @@ RUN pip install auditwheel
 WORKDIR /application
 COPY . .
 
-# Set environment variables for pip wheel directory
+# Set environment variables for pip wheel directory (optional, depending on your setup)
 ENV PIP_WHEEL_DIR=/application/wheelhouse
 ENV PIP_FIND_LINKS=/application/wheelhouse
 
-# Build the wheel
-WORKDIR /application
+# Build the wheel (optional, if needed for your setup)
 RUN pip wheel .
-RUN ls /application/wheelhouse
 
 # Stage 3: Install Image
 FROM base as install
 
-COPY --from=builder /application/wheelhouse /wheelhouse
-RUN ls /wheelhouse
+# Copy wheel files from builder stage
+FROM nameko-example-base as install
 
-# Install gateway service dependencies
-WORKDIR /wheelhouse
-RUN pip install --no-index -f /wheelhouse .
+COPY --from=builder /application/wheelhouse /wheelhouse
+
+# Install gateway service dependencies from wheel files
+RUN pip install --no-index -f /wheelhouse nameko_examples_gateway
 
 # Stage 4: Final Service Image
 FROM base as service
 
+# Copy virtual environment from install stage
 COPY --from=install /appenv /appenv
 
 # Set working directory and copy configuration files
