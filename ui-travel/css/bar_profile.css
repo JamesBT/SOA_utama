@@ -1,0 +1,98 @@
+.profile-main-content {
+    /* padding-top: 25px; */
+    min-height: 100%;
+    background-color: rgb(246, 246, 246);
+}
+
+.profile-container {
+    padding-top: 135px;
+}
+
+.sidebar-menu {
+    display: block;
+    position: absolute;
+    border: 1px solid rgba(109, 109, 109, 0.463);
+    background-color: white;
+    margin-left: 120px;
+    width:20%;
+    border-radius: 15px;
+}
+
+.bar-profile {
+    background-color: #1ba0e2;
+    padding: 20px 20px 20px 30px;
+    border-radius: 15px 15px 0 0;
+}
+
+.bar-profile p {
+    text-align: left;
+    display: block;
+    font-size: 20px;
+    color: white;
+}
+
+.bar-profile p.username {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+
+.bar-money ul {
+    width: 100%;
+    list-style-type: none;
+    border-bottom: 1px solid rgb(109, 109, 109, 0.463);
+    padding: 0; 
+}
+
+.bar-money ul li {
+    width: 100%;
+    margin: 5px 0 5px 0;
+}
+
+.bar-money ul li a {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 30px 10px 30px;
+    text-decoration: none;
+    color: black;
+    font-size: 25px;
+    box-sizing: border-box;
+}
+
+.bar-links ul {
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+}
+
+.bar-links ul li { 
+    width: 100%;
+    margin: 5px 0 5px 0;
+}
+
+.bar-links ul li a {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 30px 10px 30px;
+    text-decoration: none;
+    color: black;
+    font-size: 25px;
+}
+
+.sidebar-menu ul li:hover {
+    background-color: rgb(169, 169, 169);
+}
+
+.sidebar-menu ul li .selected{
+    background-color: #1ba0e2;
+    color: white;
+}
+
+#profile-tab-content {
+    padding: 0 20px 20px 20px;
+    flex-grow: 1;
+    margin-left: 30%; 
+    box-sizing: border-box;
+    width: calc(80% - 200px); 
+}
