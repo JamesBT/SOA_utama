@@ -7,20 +7,11 @@ if (session_status() === PHP_SESSION_NONE) {
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
   $username = $_SESSION['username'];
   $email = $_SESSION['email'];
-  $login = $_SESSION['loggedin']; // Set $login to true when user is logged in
+  $login = $_SESSION['loggedin']; 
 } else {
   include('login.php');
-  $login = false; // Set $login to false when user is not logged in
+  $login = false; 
 }
-
-
-// if (isset ($_SESSION['username']) && isset($_SESSION['email']) && isset($_SESSION['loggedin'])){
-//   $username = $_SESSION['username'];
-//   $email = $_SESSION['email'];
-//   $login = $_SESSION['loggedin'];
-// }else{
-//   include('login.php');
-// }
 
 ?>
 
@@ -63,7 +54,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                     </li>
                     <?php else : ?>
                         <li><a id="login-btn-modal" class="outline" href="#">Login</a></li>
-                        <li><a id="signup-btn-modal" class="active" href="#">Daftar</a></li>
+                        <li><a id="signup-btn-modal" class="active" href="signin.php">Daftar</a></li>
                     <?php endif; ?>
                     <li>
                         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
