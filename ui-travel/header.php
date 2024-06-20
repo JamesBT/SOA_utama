@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="css/navbar.css">
 <link rel="stylesheet" href="css/editprofile.css">
 <link rel="stylesheet" href="css/bar_profile.css">
+<link rel="stylesheet" href="css/forgotpass.css">
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

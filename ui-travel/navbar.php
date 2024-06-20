@@ -33,7 +33,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                             <a href="#">Hubungi Kami</a>
                         </div>
                     </li>
-                    <!-- <p><?php echo $login; ?></p> -->
+                    <!-- <p><?php echo $login; ?>h</p> -->
                     <li><a href="#">Pesanan</a></li>
                     <?php if (isset($login) && $login) : ?>
                     <li class="dropdown-navbar">
@@ -168,40 +168,4 @@ function myFunction() {
     const profileDropdown = document.getElementsByClassName('profile-dropdown');
     profileDropdown.classList.toggle('show');
 }
-
-// function login(event){
-//     document.getElementsByClassName('login-form').addEventListener('submit', function(event) {
-//           event.preventDefault();
-//           const email = document.getElementById('email').value;
-
-//           fetch('login.php', {
-//               method: 'POST',
-//               headers: {
-//                   'Content-Type': 'application/x-www-form-urlencoded'
-//               },
-//               body: new URLSearchParams({
-//                   'email': email
-//               })
-//           })
-//           // .then(response => response.json())
-//           .then(response => {
-//               if (!response.ok) {
-//                   throw new Error('Network response was not ok');
-//               }
-//               return response.json();
-//           })
-//           .then(data => {
-//               if (data.status === 'success') {
-//                   console.log('Login successful!');
-//                   document.getElementsByClassName("login-close")[0].onclick = function() {
-//                       document.getElementById("logModal").style.display = "none";
-//                   }
-//                   window.location.href = 'home.php';
-//               } else {
-//                   alert('Login failed: ' + data.message);
-//               }
-//           })
-//           .catch(error => console.error('Error:', error));
-//       });
-//     }
 </script>

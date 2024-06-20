@@ -1,5 +1,8 @@
 <?php 
 session_start();
+$year = null;   
+$month = null; 
+$date = null;
 $user_id = $_SESSION['user_id'];
 $name = $_SESSION['name'];
 $username = $_SESSION['username'];
@@ -30,8 +33,41 @@ $years = range(1900, date("Y"));
 $select_year = isset($_POST['year']) ? $_POST['year'] : $year;
 $select_month = isset($_POST['month']) ? $_POST['month'] : $month;
 $select_date = isset($_POST['day']) ? $_POST['day'] : $date;
-
 ?>
+
+<?php
+$error_massage = null;
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['delete_account']) && $user_id) {
+        
+        $url = "http://localhost:8000/user/$user_id";
+        
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json'  
+        ));
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
+        
+        $response = curl_exec($ch);
+        $responseData = json_decode($response, true);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        
+        curl_close($ch);  
+
+        if ($httpCode == 200) {
+            session_unset();
+            session_destroy();
+            header("Location: home.php");
+            exit();
+        } elseif ($httpCode == 400) {
+            $error_massage = isset($responseData['detail']) ? $responseData['detail'] : "An error occurred";
+        }
+    } 
+}
+?>
+
 
 <div class="edit-profile-main-content">
     <div class="edit-profile-container">
@@ -152,7 +188,7 @@ $select_date = isset($_POST['day']) ? $_POST['day'] : $date;
                         $ch = curl_init($url);
 
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-                        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT'); // Set request method to PUT
+                        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT'); 
                         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                             'Content-Type: application/json',  
                             'Content-Length: ' . strlen(json_encode($data))  
@@ -217,10 +253,13 @@ $select_date = isset($_POST['day']) ? $_POST['day'] : $date;
             <div class="del-label">
                 <h1>Delete Account</h1>
                 <p>Once your account is deleted, you will not be able to retrieve your data. This cannot be undone.</p>
+                <div class="message"> <?php echo $error_message ?></div>
             </div>
-            <div class="del-button">
-                <button class="del-acc-btn" type="submit" name="delete_account">Delete</button>
-            </div>
+            <form class="del-form" method="post" action="edit_profile.php">
+                <div class="del-button">
+                    <button class="del-acc-btn" type="submit" name="delete_account">Delete</button>
+                </div>
+            </form>
         </div>
     </div>
     
