@@ -1,0 +1,3 @@
+<?php 
+echo '{"paket": [{"paket_id": 1, "atraksi_id": 1, "type_id": 1, "type_name": "Regular", "title": "Full Day - Regular", "deskripsi": "asdfgadfgdfg", "fasilitas": "asdfgadfgdfg", "cara_penukaran": "asdfgadfgdfg", "syarat_dan_ketentuan": "asdfgadfgdfg", "harga": 100000.0, "kuota": 100, "is_refundable": 1}, {"paket_id": 2, "atraksi_id": 1, "type_id": 1, "type_name": "Regular", "title": "Full Day - Fast Track", "deskripsi": "asdfgadfgdfg", "fasilitas": "asdfgadfgdfg", "cara_penukaran": "asdfgadfgdfg", "syarat_dan_ketentuan": "asdfgadfgdfg", "harga": 100000.0, "kuota": 100, "is_refundable": 1}], "status": "Tutup"}';
+?>
