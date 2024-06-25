@@ -1,0 +1,4 @@
+[16-Jun-2024 15:38:07 UTC] PHP Warning:  Undefined variable $Malang in C:\xampp\htdocs\soa\Search-Recom-Travel\view\searchatraksi.php on line 65
+[16-Jun-2024 15:38:07 UTC] PHP Warning:  Undefined variable $Pasuruan in C:\xampp\htdocs\soa\Search-Recom-Travel\view\searchatraksi.php on line 66
+[16-Jun-2024 15:38:07 UTC] PHP Warning:  Undefined variable $Bali in C:\xampp\htdocs\soa\Search-Recom-Travel\view\searchatraksi.php on line 67
+[16-Jun-2024 15:38:07 UTC] PHP Warning:  Undefined variable $Jakarta in C:\xampp\htdocs\soa\Search-Recom-Travel\view\searchatraksi.php on line 68
