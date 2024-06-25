@@ -23,7 +23,7 @@ session_start();
                     <input class='input-search' name='search' type="text" placeholder="Mau ke mana hayo?">
                 </div>
                 <div class="tab-service">
-                    <button class="tablinks" onclick="location.href='home-hotel.php'">Hotel</button>
+                    <button class="tablinks" onclick="location.href='ui-travel/searchhotel.php'">Hotel</button>
                     <button class="tablinks" onclick="">Tiket Pesawat</button>
                     <button class="tablinks" onclick="location.href='dashboard-rental.php'">Rental Mobil</button>
                     <button class="tablinks" onclick="location.href='index-atraksi.php'">Atraksi dan Aktivitas</button>
