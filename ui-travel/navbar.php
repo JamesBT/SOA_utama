@@ -105,6 +105,19 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 
 
 <script>
+  $(document).ready(function(){
+  $(window).scroll(function(){
+  	var scroll = $(window).scrollTop();
+	  if (scroll > 50) {
+	    $(".nav").css("background" , "#fff");
+	  }
+
+	  else{
+		  $(".nav").css("background" , "transparent");  	
+	  }
+  })
+})
+
 function myFunction() {
   var x = document.querySelector("#headerList ul");
   if (x.className === "header-list") {

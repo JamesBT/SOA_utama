@@ -8,24 +8,21 @@
   padding: 15px 0 15px 0;
   line-height: 30px;
   text-align: center;
-  z-index: 1000;
+  z-index: 1000; 
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.1);
-  background-color: rgb(255, 255, 255);
+  transition: background-color 0.3s ease;
   flex-direction: column;
 }
 
-.nav .nav-container {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.header {
+.header-title {
   display: flex;
   align-items: center;
-}
-
-.header-title {
   padding-left: 3rem;
 }
 
@@ -37,10 +34,12 @@
 }
 
 .header-list {
-  height: 65px;
+  display: flex;
+  align-items: center;
+  text-align: right;
+  /* height: 65px;
   margin-right: auto;
-  float: right;
-
+  float: right; */
 }
 
 .header-list ul {

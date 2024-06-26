@@ -43,15 +43,15 @@ session_start();
                     <div style="display: flex; justify-content: space-between; width: 100%;">
                         <div class="block" style="text-align: center; width: calc(33.33% - 20px); margin-bottom: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border-radius: 10px; overflow: hidden;">
                             <img src="https://ik.imagekit.io/tvlk/image/imageResource/2023/06/20/1687227628216-01662dc275f08dc8f7f49f7d58c0e83f.png?tr=q-75,w-320" style="width: 100%; height: auto;" alt="Image 1">
-                            <h2 style="margin-top: 10px; color: #434343; font-weight: 500; font-size 20px; padding: 10px;">Tur dan Atraksi</h2>
+                            <h2 style="margin-top: 10px; color: #434343; font-weight: 500; font-size: 20px; padding: 10px;">Tur dan Atraksi</h2>
                         </div>
                         <div class="block" style="text-align: center; width: calc(33.33% - 20px); margin-bottom: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border-radius: 10px; overflow: hidden;">
                             <img src="https://ik.imagekit.io/tvlk/image/imageResource/2023/06/20/1687227638861-6acf4db6f62a44addcb7ea92a26a516a.png?tr=q-75,w-320" style="width: 100%; height: auto;" alt="Image 2">
-                            <h2 style="margin-top: 10px; color: #434343; font-weight: 500; font-size 20px; padding: 10px;">Paket Travel</h2>
+                            <h2 style="margin-top: 10px; color: #434343; font-weight: 500; font-size: 20px; padding: 10px;">Paket Travel</h2>
                         </div>
                         <div class="block" style="text-align: center; width: calc(33.33% - 20px); margin-bottom: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border-radius: 10px; overflow: hidden;">
                             <img src="https://ik.imagekit.io/tvlk/image/imageResource/2023/06/20/1687227654440-0eda1db39eea33c836b55086633e970a.png?tr=q-75,w-320" style="width: 100%; height: auto;" alt="Image 3">
-                            <h2 style="margin-top: 10px; color: #434343; font-weight: 500; font-size 20px; padding: 10px;">Asuransi</h2>
+                            <h2 style="margin-top: 10px; color: #434343; font-weight: 500; font-size: 20px; padding: 10px;">Asuransi</h2>
                         </div>
                     </div>
                 </div>
