@@ -638,7 +638,9 @@ foreach ($allCountries as $country) {
                 </div>
             </div>
         </div>
-
+        <?php
+            include('footer.php');
+            ?>
         <script>
             document.querySelectorAll('.section-syarat h2').forEach(sectionHeader => {
                 sectionHeader.addEventListener('click', () => {

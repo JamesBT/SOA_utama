@@ -815,6 +815,10 @@ $Provinsi = $daftarProvinsi;
         </div>
     </div>
 
+    <?php
+    include('footer.php');
+    ?>
+
     <script>
         document.querySelectorAll('.dropdown-title').forEach(title => {
             title.addEventListener('click', () => {
