@@ -33,7 +33,7 @@ require "connect.php";
         <div class="row align-items-start">
             <div class="col-md-4">
                 <section class="hotel">
-                    <img src="image/villa.jpg" alt="Villa Image">
+                    <img src="images/villa.jpg" alt="Villa Image">
                     <div class="hotelInfo">
                         <p>Hotel</p>
                         <h4>The Kayuan Lumbur Resort Ubud</h4>
@@ -100,7 +100,7 @@ require "connect.php";
                         <div class="bookDetail">
                             <div class="row">
                                 <div class="col">
-                                    <img src="image/room.jpg" alt="Villa Image" style="width: 100%; height:80%;">
+                                    <img src="images/room.jpg" alt="Villa Image" style="width: 100%; height:80%;">
                                 </div>
                                 <div class="col" style="margin-top: 3vh;">
                                     <p><b>Room type</b></p>
