@@ -11,10 +11,11 @@ $(document).ready(function () {
     var dayIndex = currentDate.getDay();
 
     var dayName = days[dayIndex];
+    var address = '3.217.250.166:8003'
 
     // init
     $.ajax({
-        url: 'http://localhost:8000/api/atraksi',
+        url: `http://${address}/api/atraksi`,
         type: 'get',
         success: function (data) {
             data = JSON.parse(data);
@@ -77,7 +78,7 @@ $(document).ready(function () {
     });
 
     $.ajax({
-        url: 'http://localhost:8000/api/atraksi/paket',
+        url: `http://${address}/api/atraksi/paket`,
         type: 'GET',
         success: function (data) {
             data = JSON.parse(data);
@@ -103,21 +104,35 @@ $(document).ready(function () {
             $('#modal-paket-container').empty()
             $('#paket-loader').show();
             $.ajax({
-                url: `http://localhost:8000/api/atraksi/tutup/${dateText}`,
+                url: `http://${address}/api/atraksi/tutup/${dateText}`,
                 type: "GET",
                 success: function (data) {
                     console.log(data);
                     status = JSON.parse(data)['status'];
 
                     $.ajax({
-                        url: 'http://localhost:8000/api/atraksi/paket',
+                        url: `http://${address}/api/atraksi/paket`,
                         type: 'GET',
                         success: function (data) {
                             data = JSON.parse(data);
                             console.log(data.paket);
                             $('#paket-loader').hide();
                             data.paket.forEach((element, index) => {
-                                $('#paket-container').append(createCard(element, status));;
+                                // $('#paket-container').append(createCard(element, status));
+                                $.ajax({
+                                    url: `http://${address}/api/atraksi/paket/${element.paket_id}/check/${dateText}`,
+                                    type: 'GET',
+                                    success: function (data) {
+                                        data = JSON.parse(data);
+                                        console.log(data);
+                                        if (data.status == 'tersedia') {
+                                            $('#paket-container').append(createCard(element, 'Buka'));
+                                        } else {
+                                            $('#paket-container').append(createCard(element, 'Tutup'));
+                                        }
+
+                                    }
+                                });
                                 $('#modal-paket-container').append(createModal(element));
                             })
                         }
@@ -136,21 +151,40 @@ $(document).ready(function () {
         $('#modal-paket-container').empty()
         $('#paket-loader').show();
         $.ajax({
-            url: `http://localhost:8000/api/atraksi/paket`,
+            url: `http://${address}/api/atraksi/paket`,
             type: "GET",
             success: function (data) {
                 console.log(data);
                 statusBuka = JSON.parse(data)['status'];
 
                 $.ajax({
-                    url: 'http://localhost:8000/api/atraksi/paket',
+                    url: `http://${address}/api/atraksi/paket`,
                     type: 'GET',
                     success: function (data) {
                         data = JSON.parse(data);
                         console.log(data.paket);
                         $('#paket-loader').hide();
                         data.paket.forEach((element, index) => {
-                            $('#paket-container').append(createCard(element, statusBuka));
+                            const todayDate = new Date();
+                            if (statusBuka == 'Buka') {
+                                $.ajax({
+                                    url: `http://${address}/api/atraksi/paket/${element.paket_id}/check/${todayDate}`,
+                                    type: 'GET',
+                                    success: function (data) {
+                                        data = JSON.parse(data);
+                                        console.log(data);
+                                        if (data.status == 'tersedia') {
+                                            $('#paket-container').append(createCard(element, 'Buka'));
+                                        } else {
+                                            $('#paket-container').append(createCard(element, 'Tutup'));
+                                        }
+                                    }
+                                });
+                            } else {
+                                $('#paket-container').append(createCard(element, statusBuka));
+                            }
+
+
                             $('#modal-paket-container').append(createModal(element));
                         })
                     }
@@ -193,21 +227,35 @@ $(document).ready(function () {
         $('#modal-paket-container').empty()
         $('#paket-loader').show();
         $.ajax({
-            url: `http://localhost:8000/api/atraksi/tutup/${datefilter}`,
+            url: `http://${address}/api/atraksi/tutup/${datefilter}`,
             type: "GET",
             success: function (data) {
                 console.log(data);
                 status = JSON.parse(data)['status'];
 
                 $.ajax({
-                    url: 'http://localhost:8000/api/atraksi/paket',
+                    url: `http://${address}/api/atraksi/paket`,
                     type: 'GET',
                     success: function (data) {
                         data = JSON.parse(data);
                         console.log(data.paket);
                         $('#paket-loader').hide();
                         data.paket.forEach((element, index) => {
-                            $('#paket-container').append(createCard(element, status));
+                            $.ajax({
+                                url: `http://${address}/api/atraksi/paket/${element.paket_id}/check/${datefilter}`,
+                                type: 'GET',
+                                success: function (data) {
+                                    data = JSON.parse(data);
+                                    console.log(data);
+                                    if (data.status == 'tersedia') {
+                                        $('#paket-container').append(createCard(element, 'Buka'));
+                                    } else {
+                                        $('#paket-container').append(createCard(element, 'Tutup'));
+                                    }
+
+                                }
+                            });
+
                             $('#modal-paket-container').append(createModal(element));
                         })
                     }
@@ -220,6 +268,7 @@ $(document).ready(function () {
     function createCard(pkg, status) {
 
         if (status == "Buka") {
+
             return `
             <div class="card mt-3">
                 <div class="card-body">
@@ -244,7 +293,7 @@ $(document).ready(function () {
                     <hr>
                     <div class="d-flex justify-content-between">
                         <p class="unavail fw-bold fs-4 m-0">IDR ${pkg.harga.toLocaleString()}</p>
-                        <a href="" class="btn btn-primary">Pilih Tiket</a>
+                        <a href="" class="btn btn-secondary" style="pointer-events: none">Pilih Tiket</a>
                     </div>
                 </div>
                 <div class="paket-unavail ">

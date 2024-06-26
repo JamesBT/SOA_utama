@@ -91,7 +91,7 @@ $api_url = 'http://localhost:8000/api/atraksi';
 
 <body>
     <div id="loader" style="position: absolute;top:50%;left:50%;transform: translate(-50%, -50%)">
-        <img src="./images/Ellipsis@1x-1.0s-200px-200px.svg" alt="">
+        <img src="./Ellipsis@1x-1.0s-200px-200px.svg" alt="">
     </div>
 
     <div id="content" class="container mt-4 d-none">
