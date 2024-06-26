@@ -1,29 +1,46 @@
 <?php
 session_start();
-require "connect.php";
 include "header.php";
 
-// // $query = "SELECT negara FROM travel_insurance LIMIT 1";
-$query2 = "SELECT `1-4` AS price FROM travel_insurance WHERE wilayah = 1 AND negara = 'Indonesia'";
-$results = mysqli_query($con, $query2);
+$defaultCountryId = isset($_GET['country_id']) ? intval($_GET['country_id']) : 1;
 
-if ($results && mysqli_num_rows($results) > 0) {
-    $row = mysqli_fetch_assoc($results);
-    $price = $row['price'];
-} else {
-    $price = " Harga tidak tersedia";
+// Fetch all countries data from API
+$allCountriesApiUrl = 'http://ec2-52-7-154-154.compute-1.amazonaws.com:8005/insurance/travel/all';
+$allCountriesData = @file_get_contents($allCountriesApiUrl);
+if ($allCountriesData === FALSE) {
+    die('Error fetching all countries data from API');
+}
+$allCountries = json_decode($allCountriesData, true);
+if ($allCountries === NULL) {
+    die('Error decoding JSON data');
 }
 
-// Query untuk mengambil nama negara dari tabel
-$query = "SELECT * FROM travel_insurance";
-$result = mysqli_query($con, $query);
+// Fetch specific country data from API
+$countryApiUrl = 'http://ec2-52-7-154-154.compute-1.amazonaws.com:8005/insurance/travel/' . $defaultCountryId;
+$countryData = @file_get_contents($countryApiUrl);
+if ($countryData === FALSE) {
+    die('Error fetching country data from API');
+}
+$countryDetails = json_decode($countryData, true);
+if ($countryDetails === NULL) {
+    die('Error decoding JSON data');
+}
 
-$countries = [];
-if ($result && mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $countries[] = $row['negara'];
-        // $price = $row['1-4'];
-    }
+// Extract the price and region (wilayah)
+$price = $countryDetails['1-4'];
+$region = $countryDetails['wilayah'];
+$negara = $countryDetails['negara'];
+// echo $countryData;
+// Determine if the region is domestic or international
+$regionText = ($region === 1) ? 'DOMESTIK' : 'INTERNASIONAL';
+// echo $regionText;
+// Extract country names for the list
+$countryNames = [];
+foreach ($allCountries as $country) {
+    $countryNames[] = [
+        'id' => $country['id_travel'],
+        'name' => $country['negara']
+    ];
 }
 
 ?>
@@ -40,7 +57,6 @@ if ($result && mysqli_num_rows($result) > 0) {
         .bg-body-indexs {
             background-color: #f8f9fa;
             padding: 20px;
-            
         }
 
         .contents {
@@ -292,7 +308,9 @@ if ($result && mysqli_num_rows($result) > 0) {
 </head>
 
 <body>
-<?php include('navbar.php'); ?>
+    <?php
+    include('navbar.php');
+    ?>
     <div class="bg-body-index">
         <div class="container">
             <div class="content">
@@ -309,16 +327,15 @@ if ($result && mysqli_num_rows($result) > 0) {
     <div class="container2">
         <div class="contents">
             <div class="texts">
-                <h1 class="display-6 fst-italic">INDONESIA ⇔ DOMESTIK/INTERNASIONAL</h1>
-                <p>Untuk perjalanan ke suatu daerah di Indonesia atau secara Internasional, tersedia berbagai paket asuransi <a href="#detail-asuransi"
+            <h1 class="display-6 fst-italic">INDONESIA ⇔ <?php echo htmlspecialchars($regionText); ?></h1>
+            <p>Untuk perjalanan ke suatu daerah di Indonesia atau secara Internasional, tersedia berbagai paket asuransi <a href="#detail-asuransi"
                         class="link-detail">manfaat perlindungan hingga 1,5 milyar</a>.</p>
             </div>
         </div>
     </div>
 
     <div class="texts2">
-        <div class="info-title">Perjalanan Domestik/Internasional</div>
-        <!-- <div>PAKET 1</div> -->
+        <div class="info-title">Perjalanan ke <?php echo htmlspecialchars($negara); ?></div>
     </div>
 
     <div class="container3">
@@ -540,12 +557,12 @@ if ($result && mysqli_num_rows($result) > 0) {
                         <ul>
                             <?php
                             // Loop untuk menampilkan daftar negara
-                            foreach ($countries as $index => $country) {
-                                // Pecah menjadi dua kolom, 10 negara di setiap kolom
+                            foreach ($countryNames as $index => $country) {
+                                // Split into two columns, 10 countries in each column
                                 if ($index % 10 == 0 && $index != 0) {
                                     echo '</ul></div><div class="col-md-6"><ul>';
                                 }
-                                echo '<li><a href="travel_insurance.php?country=' . urlencode($country) . '">Travel Insurance to ' . htmlspecialchars($country) . '</a></li>';
+                                echo '<li><a href="travel_insurance.php?country_id=' . urlencode($country['id']) . '">Travel Insurance to ' . htmlspecialchars($country['name']) . '</a></li>';
                             }
                             ?>
                         </ul>
@@ -634,9 +651,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                 });
             });
         </script>
-<?php 
-    include "footer.php"
-?>
+
 </body>
 
 </html>
