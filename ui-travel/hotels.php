@@ -578,7 +578,7 @@ $room = $_GET['room'];
                             <h2 class="text-sm text-end text-gray-400">Start Price</h2>
                             <h1 class="font-semibold text-xl text-orange-700">`+hotel_start_price+`</h1>
                         </div>
-                        <a href="/home-hotel?service_id=`+service_id+`&checkout=`<?php echo($checkout) ?>`&checkin=`<?php echo($checkin) ?>`">
+                        <a href="/home-hotel.php?service_id=`+service_id+`&checkout=`<?php echo($checkout) ?>`&checkin=`<?php echo($checkin) ?>`">
                             <button class="py-2 px-4 text-sm rounded bg-orange-600 hover:bg-orange-700 text-white font-semibold">Select Room</button>
                         </a>
                     </div>

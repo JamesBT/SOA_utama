@@ -48,7 +48,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                           </div>
                       </li>
                       <?php else : ?>
-                          <li><a id="login-btn-modal" class="outline" href="login.php">Login</a></li>
+                          <li><a id="login-btn-modal" class="outline" href="loginpage.php?redirect_url=<?php echo urlencode("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"); ?>">Login</a></li>
                           <li><a id="signup-btn-modal" class="active" href="signin.php">Daftar</a></li>
                       <?php endif; ?>
                       <li>
@@ -147,14 +147,14 @@ function myFunction() {
     };
 </script>
 
-<script>
+<!-- <script>
   document.getElementById("login-btn-modal").onclick = function() {
     document.getElementById("logModal").style.display = "block";
   }
   document.getElementById("signup-btn-modal").onclick = function() {
     document.getElementById("logModal").style.display = "block";
   }
-</script>
+</script> -->
 
 <script>
   function showProfileDropdown(event) {
