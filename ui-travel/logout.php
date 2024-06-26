@@ -7,6 +7,9 @@ session_destroy();
 unset($_SESSION["loggedin"]);
 unset($_SESSION["username"]);
 unset($_SESSION["email"]);
-header("Location: home.php"); 
+echo '<script>
+        localStorage.removeItem("userID");
+        window.location.href = "home.php";
+    </script>';
 exit();
 ?>

@@ -40,7 +40,7 @@ $error_massage = null;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['delete_account']) && $user_id) {
         
-        $url = "http://localhost:8000/user/$user_id";
+        $url = "http://34.227.203.225:8003/user/$user_id";
         
         $ch = curl_init($url);
 
@@ -183,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             'negara' => $country
                         );
                         
-                        $url = "http://localhost:8000/user/$user_id";
+                        $url = "http://34.227.203.225:8003/user/$user_id";
                         
                         $ch = curl_init($url);
 

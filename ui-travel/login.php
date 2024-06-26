@@ -19,7 +19,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 'password' => $password
             );
             
-            $url = 'http://localhost:8000/user/auth';
+            $url = 'http://34.227.203.225:8003/user/auth';
             
             $ch = curl_init($url);
 
@@ -48,6 +48,12 @@ if (session_status() === PHP_SESSION_NONE) {
                 $_SESSION['gender'] = $responseData['gender'];
                 $_SESSION['kota'] = $responseData['kota'];
                 $_SESSION['negara'] = $responseData['negara'];
+                
+                echo "<script>
+                    console.log('LOGIN BERHASIL');
+                    localStorage.setItem('userID', {$responseData['user_id']});
+                </script>";
+                echo "testing echo";
             } elseif ($httpCode == 400) {
                 $_SESSION['error'] = $responseData['detail'];
             }

@@ -15,7 +15,7 @@ session_start();
                 'kode_ganti_pass' => $code
             );
             
-            $url = "http://localhost:8000/user/forgot";
+            $url = "http://34.227.203.225:8003/user/forgot";
             
             $ch = curl_init($url);
 

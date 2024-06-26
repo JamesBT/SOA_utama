@@ -48,7 +48,7 @@ $select_date = isset($_POST['day']) ? $_POST['day'] : '';
                 'user_password' => $password
             );
             
-            $url = "http://localhost:8000/user";
+            $url = "http://34.227.203.225:8003/user";
             
             $ch = curl_init($url);
 
