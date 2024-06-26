@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Agency</title>
+    <link rel="stylesheet" href="TA_Timothy_style.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="navbar-brand">Timothy Tour</div>
+            <ul class="navbar-menu">
+                <li class="navbar-item"><a href="#explore">Filter</a></li>
+                <li class="navbar-item"><a href="#package">Packages</a></li>
+                <li class="navbar-item"><a href="#my-bookings">My Bookings</a></li>
+                <!-- <li class="navbar-item profile">
+                    <a href="#profile">Profile</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#profile">Profile</a></li>
+                        <li><a href="#settings">Settings</a></li>
+                        <li><a href="#logout">Logout</a></li>
+                    </ul>
+                </li> -->
+            </ul>
+        </nav>
+        <img src="https://travelagentimages.s3.amazonaws.com/R.png" alt="background gunung">
+        <div class="centered-button">
+            <h1 class="main-heading">Tour Around The World</h1>
+            <a href="#explore" class="explore-button">Explore Now</a>
+        </div>
+    </div>
+    <div id="explore" class="search-section">
+        <h2 class="search-title">Filter</h2>
+        <div class="card">
+            <div class="search-content">
+                <img src="https://travelagentimages.s3.amazonaws.com/vacation.png" alt="vacation" class="search-image">
+                <div class="search-form">
+                    <form action="#package" method="get">
+                        <label for="from">Origin City</label>
+                        <input required type="text" id="from" name="from" placeholder="flying from">
+                        <label for="to">Destination City</label>
+                        <input required type="text" id="to" name="to" placeholder="flying to">
+                        <label for="guests">Minimum Number of Person</label>
+                        <input required type="number" min="1" id="guests" name="guests" placeholder="number of guests">
+                        <label for="arrival">Departure Date</label>
+                        <input required type="date" id="arrival" name="arrival">
+                        <label for="leaving">Return Date</label>
+                        <input required type="date" id="leaving" name="leaving">
+                        <button type="submit" id="filterButton">Filter</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="package-header">
+        <div></div>
+        <h2 class="search-package" id="package">Packages</h2>
+        <a href="index.html#package"><button class="show-all-package-button">Show All Package</button></a>
+    </div>
+
+
+    <div class="cardd-container">
+
+    </div>
+
+    <div id="package-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Package Details</h2>
+            <div id="day-details">
+
+            </div>
+            <br>
+            <button id="prev-day" class="carousel-button"><</button>
+            <button id="next-day" class="carousel-button">></button>
+            <button class="buy-button-modal">Buy</button>
+
+        </div>
+    </div>
+
+    <div class="container-booking" id="my-bookings">
+        <h1>My Bookings</h1>
+        <div class="bookings"></div>
+    </div>  
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="TA_Timothy_script.js"></script>
+</body>
+
+</html>
