@@ -55,12 +55,10 @@
                         <div class="relative mt-2">
                             <select name="originplace" id="originplace"
                                 class="w-full p-2 pl-10 rounded border border-gray-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent">
-                                <option selected>Choose City</option>
-                                <option value="JKTA">Jakarta</option>
-                                <option value="DPS">Bali</option>
+                                <option value="JKT">Jakarta</option>
+                                <option value="YIA">Yogyakarta</option>
                                 <option value="SUB">Surabaya</option>
-                                <option value="BTH">Batam</option>
-
+                                <option value="BDO">Bandung</option>
                             </select>
                             <svg class="absolute top-2.5 left-2 w-6 h-6 text-gray-400" fill="#000000" viewBox="0 0 256 256"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -74,11 +72,10 @@
                         <div class="relative mt-2">
                             <select name="destinationplace" id="destinationplace"
                                 class="w-full p-2 pl-10 rounded border border-gray-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent">
-                                <option selected>Choose City</option>
-                                <option value="JKTA">Jakarta</option>
-                                <option value="DPS">Bali</option>
+                                <option value="JKT">Jakarta</option>
+                                <option value="YIA">Yogyakarta</option>
                                 <option value="SUB">Surabaya</option>
-                                <option value="BTH">Batam</option>
+                                <option value="BDO">Bandung</option>
                             </select>
                             <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                             <svg class="absolute top-2.5 left-2 w-6 h-6 text-gray-400" fill="#000000" viewBox="0 0 256 256"
@@ -110,13 +107,27 @@
                     </div>
                 </div>
                 <div class="flex justify-end">
-                    <a href="flight.php" class="w-1/2">
-                    <button id="btnsearch"class="w-full text-white p-2 mt-2 rounded bg-orange-600 hover:bg-orange-700	font-bold flex items-center justify-center gap-1"><img src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/6/68a17a4492b3b7647bb89a5a03b15de0.svg"> <div>Search Flight</div></button>
-                    </a>
+                    <!-- <a href="flight.php" class="w-1/2"> -->
+                        <button id="gosearchflight"class="w-full text-white p-2 mt-2 rounded bg-orange-600 hover:bg-orange-700	font-bold flex items-center justify-center gap-1"><img src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/6/68a17a4492b3b7647bb89a5a03b15de0.svg"> <div>Search Flight</div></button>
+                        
+                    <!-- </a> -->
                 </div>
             </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#gosearchflight').on('click',function(){
+                var originplace = $('#originplace').val();
+                var destinationplace = $('#destinationplace').val();
+                var departuredate = $('#departuredate').val();
+                if (departuredate === null || departuredate === '') {
+                    departuredate = '-';
+                }
+                window.location.href = `flight.php?originplace=${originplace}&destinationplace=${destinationplace}&departuredate=${departuredate}`;
+            });
+        })
+    </script>
 </body>
 </html>
