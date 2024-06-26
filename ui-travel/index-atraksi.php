@@ -81,6 +81,11 @@ $api_url = 'http://localhost:8000/api/atraksi';
             color: white;
             border-radius: 0px 0px 5px 5px;
         }
+
+        .btn-modal-paket a {
+            color: black;
+            font-size: 18px;
+        }
     </style>
 </head>
 
@@ -100,13 +105,13 @@ $api_url = 'http://localhost:8000/api/atraksi';
                 </div>
                 <div class="carousel-inner" id="atraksi-img">
                     <!-- <div class="carousel-item active">
-                        <img src="./images/download.jpg" class="d-block w-100" alt="...">
+                        <img src="./download.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="./images/images.jpg" class="d-block w-100" alt="...">
+                        <img src="./images.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="./images/Tiket Dunia Fantasi di Jakarta.jpg" class="d-block w-100" alt="...">
+                        <img src="./Tiket Dunia Fantasi di Jakarta.jpg" class="d-block w-100" alt="...">
                     </div> -->
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -192,7 +197,7 @@ $api_url = 'http://localhost:8000/api/atraksi';
                                 <a class="text-decoration-none p-2 fw-bold" id="paket-filter-reset">Reset</a>
                             </div>
                             <div id="paket-loader" class="">
-                                <img src=" ./images/Ellipsis@1x-1.0s-200px-200px.svg" alt="">
+                                <img src=" ./Ellipsis@1x-1.0s-200px-200px.svg" alt="">
                             </div>
                             <div class="card infopenting m-4">
                                 <div class="m-4 mt-0" id="paket-container">
@@ -384,6 +389,8 @@ $api_url = 'http://localhost:8000/api/atraksi';
             </div>
         </div>
     </div>
+
+    <div id="modal-paket-container"></div>
 
     <!-- Modal highlight-->
     <div class="modal fade" id="highlight-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="highlightLabel" aria-hidden="true">
