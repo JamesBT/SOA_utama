@@ -6,6 +6,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/login.css">
 </head>
 <style>
     body {
@@ -98,7 +99,7 @@
                     <div class="w-1/3">
                         <label for="people" class="pb-3 text-gray-500">Guests</label>
                         <div class="relative w-full mt-2">
-                            <input name="people" name="people" type="number" value="1" min="1" max="20"  class="w-full p-2 pl-10 rounded border border-gray-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent">
+                            <input id="people" name="people" type="number" value="1" min="1" max="20"  class="w-full p-2 pl-10 rounded border border-gray-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent">
                             <img class="absolute top-2 left-2"  src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/4/4c4f475da027590bc183e3debcba1a91.svg" style="margin-right: 12px;">
                             <!-- room text place right -->
                             <div class="absolute bottom-2 left-16">People</div>
@@ -116,9 +117,9 @@
                     </div>
                     <div class="w-1/3 flex items-end">
                         <!-- Button search -->
-                        <a href="hotels.php" class="w-full">
-                            <button class="w-full text-white p-2 rounded bg-orange-600 hover:bg-orange-700	font-bold flex items-center justify-center gap-1"><img src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/6/68a17a4492b3b7647bb89a5a03b15de0.svg"> <div>Search Hotels</div></button>
-                        </a>
+                        <!-- <a href="hotels.php" class="w-full"> -->
+                            <button id="gosearchhotel" class="w-full text-white p-2 rounded bg-orange-600 hover:bg-orange-700	font-bold flex items-center justify-center gap-1"><img src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/6/68a17a4492b3b7647bb89a5a03b15de0.svg"> <div>Search Hotels</div></button>
+                        <!-- </a> -->
                     </div>
                 </div>
             </div>

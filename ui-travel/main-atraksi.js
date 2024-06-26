@@ -273,7 +273,6 @@ $(document).ready(function () {
             <div class="card mt-3">
                 <div class="card-body">
                     <h5 class="card-title">${pkg.title}</h5>
-                    <p class="card-text">${pkg.deskripsi}</p>
                     <a href="" class="card-link text-decoration-none fw-bolder text-primary" type="button" data-bs-toggle="modal" data-bs-target="#paket-modal-${pkg.paket_id}">detail</a>
                     <hr>
                     <div class="d-flex justify-content-between">
@@ -288,7 +287,6 @@ $(document).ready(function () {
             <div class="card mt-3">
                 <div class="card-body unavail">
                     <h5 class="card-title">${pkg.title}</h5>
-                    <p class="card-text">${pkg.deskripsi}</p>
                     <a href="" class="card-link text-decoration-none fw-bolder text-primary" type="button" data-bs-toggle="modal" data-bs-target="#paket-modal-${pkg.paket_id}">detail</a>
                     <hr>
                     <div class="d-flex justify-content-between">

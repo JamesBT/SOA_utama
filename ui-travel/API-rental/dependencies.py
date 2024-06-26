@@ -419,7 +419,7 @@ class Database(DependencyProvider):
                 # database='jayamahe_easy_ride_jakarta',
                 # database='moovby_driverless_jakarta',
                 # database='ada_kawan_jogja',
-                database='empat_roda_jogja',
+                database='soa',
                 user='root',
                 password=''
             )

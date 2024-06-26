@@ -1,3 +1,18 @@
+<?php 
+
+$city = $_GET['city'];
+$checkin = $_GET['checkin'];
+$checkout = $_GET['checkout'];
+$people = $_GET['people'];
+$room = $_GET['room'];
+
+// echo "City: " . htmlspecialchars($city) . "<br>";
+// echo "Check-in Date: " . htmlspecialchars($checkin) . "<br>";
+// echo "Check-out Date: " . htmlspecialchars($checkout) . "<br>";
+// echo "Number of People: " . htmlspecialchars($people) . "<br>";
+// echo "Number of Rooms: " . htmlspecialchars($room) . "<br>";
+?>
+
 <!doctype html>
 <html>
 
@@ -563,7 +578,7 @@
                             <h2 class="text-sm text-end text-gray-400">Start Price</h2>
                             <h1 class="font-semibold text-xl text-orange-700">`+hotel_start_price+`</h1>
                         </div>
-                        <a href="/hoteldetail?service_id=`+service_id+`">
+                        <a href="/home-hotel?service_id=`+service_id+`&checkout=`<?php echo($checkout) ?>`&checkin=`<?php echo($checkin) ?>`">
                             <button class="py-2 px-4 text-sm rounded bg-orange-600 hover:bg-orange-700 text-white font-semibold">Select Room</button>
                         </a>
                     </div>

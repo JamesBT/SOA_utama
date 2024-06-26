@@ -1,7 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
     async function fetchHotelData() {
+        const serviceIdToIpMap = {
+            1: 'http://52.200.174.164:8003/hotel',
+            2: 'http://44.218.207.165:8009/hotel',
+            3: 'http://50.16.176.111:8005/hotel',
+            4: 'http://3.215.46.161:8011/hotel',
+            5: 'http://3.215.46.161:8013/hotel',
+            6: 'http://100.28.104.239:8007/hotel'
+            // Add more mappings as needed
+        };
+        
+        // ganti ip ketika serviceId berbeda
+        // const serviceId = <?php echo json_encode($service_id); ?>;
+
+
         try {
-            const response = await fetch('http://localhost:8000/merlynn_park_hotel', {
+            const response = await fetch('http://3.215.46.161:8013/hotel', {
                 method: "GET"
             }); // Adjust the URL as necessary
             if (!response.ok) {
@@ -50,7 +64,7 @@ function getRoomType() {
 
         async fetchRoomType() {
             try {
-                const response = await fetch('http://localhost:8000/merlynn_park_hotel/room_type', {
+                const response = await fetch('http://3.215.46.161:8013/hotel/room_type', {
                     method: "GET"
                 }); // Adjust the URL as necessary
                 if (!response.ok) {

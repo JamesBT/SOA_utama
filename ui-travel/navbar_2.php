@@ -48,7 +48,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                           </div>
                       </li>
                       <?php else : ?>
-                          <li><a id="login-btn-modal" class="outline" href="#">Login</a></li>
+                          <li><a id="login-btn-modal" class="outline" href="login.php">Login</a></li>
                           <li><a id="signup-btn-modal" class="active" href="signin.php">Daftar</a></li>
                       <?php endif; ?>
                       <li>
@@ -110,8 +110,6 @@ function myFunction() {
 </script>
 
 <script>
-    localStorage.setItem("userID", "<?php echo $userID; ?>");
-
     let selectedLanguage = 'EN';
     let selectedCurrency = 'USD';
     var modal = document.getElementById("langModal");
@@ -155,9 +153,6 @@ function myFunction() {
   }
   document.getElementById("signup-btn-modal").onclick = function() {
     document.getElementById("logModal").style.display = "block";
-  }
-  document.getElementsByClassName("login-close")[0].onclick = function() {
-      document.getElementById("logModal").style.display = "none";
   }
 </script>
 
