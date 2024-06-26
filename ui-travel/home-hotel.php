@@ -1,6 +1,6 @@
 <?php 
-	$service_id = $_GET['service_id'];
-	// $service_id = 5;
+	// $service_id = $_GET['service_id'];
+	$service_id = 5;
 	$checkin = $_GET['checkin'];
 	$checkout = $_GET['checkout'];
 ?>
