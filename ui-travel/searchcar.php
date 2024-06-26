@@ -116,19 +116,28 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#city_id').on('input', function() {
+            var city_ids = {};
+            $('#city_id').on('input', function(){
                 var search = $(this).val();
-                if (search != '') {
-                    // $.ajax({
-                    //     url: 'search.php',
-                    //     type: 'POST',
-                    //     data: {search:search},
-                    //     success: function(response){
-                    //         $('#cityList').html(response);
-                    $('#cityList').removeClass('hidden')
-                    console.log('searching...');
-                    //     }
-                    // });
+                if(search != ''){
+                    $.ajax({
+                        url: 'http://107.20.145.163:8003/lokasi/'+ search,
+                        type: 'GET',
+                        success: function(response){
+                            hasil = ''
+                            for (var i = 0; i < response.data.length; i++) {
+                                city_ids[response.data[i].nama_kota] = response.data[i].id;
+                                console.log(response.data[i].nama_kota)
+                                hasil+= `<li class="pl-8 pr-2 py-1 border-gray-100 relative cursor-pointer hover:bg-yellow-50 hover:text-gray-900">
+                                    `+response.data[i].nama_kota+`
+                                </li>`
+                                
+                            }
+                            $('#cityList').html(hasil);
+                            $('#cityList').removeClass('hidden')
+                            console.log('searching...');
+                        }
+                    });
                 }
             });
             $(document).on('click', 'li', function() {
@@ -172,6 +181,17 @@
                 if (checkout != 'NaN-NaN-NaN') {
                     $('#checkout').val(checkout);
                 }
+            });
+
+            // button search on click
+            $('#search').on('click', function() {
+                var city = $('#city_id').val();
+                city = city_ids[city];
+                var checkin = $('#checkin').val();
+                var checkout = $('#checkout').val();
+                var driver = $('input[name=driver]:checked').val();
+                window.location.href = `cars.php?city=${city}&checkin=${checkin}&checkout=${checkout}&withDriver=${driver}`;
+
             });
 
         })
