@@ -24,7 +24,7 @@ session_start();
                     <button class="tablinks" onclick="location.href='searchflight.php'">Tiket Pesawat</button>
                     <button class="tablinks" onclick="location.href='searchcar.php'">Rental Mobil</button>
                     <button class="tablinks" onclick="location.href='searchatraksi.php'">Atraksi & Aktivitas</button>
-                    <button class="tablinks" onclick="location.href='searchpackage.php'">Paket Travel</button>
+                    <button class="tablinks" onclick="location.href='index-travel.php'">Paket Travel</button>
                     <button class="tablinks" onclick="location.href='insurance.php'">Asuransi</button>
                 </div>
             </div>
