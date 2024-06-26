@@ -82,7 +82,7 @@ $room = $_GET['room'];
                 2 People 1 Room</div>
         </div>
     </div>
-    <!-- back button -->
+    <!-- back button --> 
     <div class="back-button absolute top-20 cursor-pointer text-gray-400 left-10">
         <a href="searchhotel.php">
             <i class="fa-solid fa-arrow-left"></i>
