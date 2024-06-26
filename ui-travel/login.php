@@ -9,7 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
     $_SESSION['loggedin'] = false;
     $_SESSION['error'] = null;
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
         if (isset($_POST['email']) && isset($_POST['password'])) {
             $email = $_POST['email'];
             $password = $_POST['password'];
