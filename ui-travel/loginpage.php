@@ -56,8 +56,7 @@
         } else {
             $_SESSION['error'] = "Email and Password are required";
         }
-        // $redirectUrl = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : 'home.php';
-        echo $redirectUrl;
+        $redirectUrl = !empty($_POST['redirect_url']) ? $_POST['redirect_url'] : 'home.php';
         header("Location: " . $redirectUrl);
         exit();
     } 
@@ -76,7 +75,7 @@
         <div id="logModal" class="log-modal">
             <div class="login-modal-cnt">
                 <form id="loginForm" class="login-form" method="POST" action="login.php">
-                <input type="hidden" name="redirect_url" value="<?php echo htmlspecialchars($redirectUrl); ?>">
+                    <input type="hidden" name="redirect_url" value="<?php echo basename(htmlspecialchars($redirectUrl)); ?>">
                     <a class="login-close" href="home.php">&times;</a>
                     <span class="login-title">Login/Daftar</span>
                     

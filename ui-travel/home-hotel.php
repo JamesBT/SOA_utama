@@ -1,6 +1,6 @@
 <?php 
-	// $service_id = $_GET['service_id'];
-	$service_id = 5;
+	$service_id = $_GET['service_id'];
+	// $service_id = 3;
 	$checkin = $_GET['checkin'];
 	$checkout = $_GET['checkout'];
 ?>
@@ -176,7 +176,7 @@
                                     <p class="mb-4 text-xl" x-text="modalData.facilities"></p>
                                     <div id="room_id" x-text="modalData.id"></div>
 									<button onclick="bookRoom()">Book room</button>
-									<!-- <button onclick="location.href='/bookingHotel.html?service_id=<?php echo $service_id ?>&checkout=<?php echo $checkout ?>&checkin=<?php echo $checkin ?>&room_id=' + modalData.id">Book room</button> -->
+									<!-- <button onclick="location.href='bookingHotel.html?service_id=<?php echo $service_id ?>&checkout=<?php echo $checkout ?>&checkin=<?php echo $checkin ?>&room_id=' + modalData.id">Book room</button> -->
                                 </div>
                             </div>
 						</div>
@@ -208,7 +208,7 @@
 				var checkin = "<?php echo $checkin ?>";
 				var checkout = "<?php echo $checkout ?>";
 
-				var url = '/bookingHotel.html?service_id=' + service_id + '&checkout=' + checkout + '&checkin=' + checkin + '&room_id=' + room_id;
+				var url = './bookingHotel.html?service_id=' + service_id + '&checkout=' + checkout + '&checkin=' + checkin + '&room_id=' + room_id;
 				
 				// Redirect to the constructed URL
 				location.href = url;
@@ -271,27 +271,28 @@
 				fetchHotelData(serviceId)
 			});
 
-			function getRoomType() {
+			function getRoomType(serviceId) {
 				return {
 					activeSlide: 1,
 					slides: [],
 					modalData: {},
 
-					async fetchRoomType(serviceId) {
+					async fetchRoomType() {
 						const serviceIdToIpMap = {
-							1: 'http://52.200.174.164:8003/hotel',
-							2: 'http://44.218.207.165:8009/hotel',
-							3: 'http://50.16.176.111:8005/hotel',
-							4: 'http://3.215.46.161:8011/hotel',
-							5: 'http://3.215.46.161:8013/hotel',
-							6: 'http://100.28.104.239:8007/hotel'
+							1: 'http://52.200.174.164:8003/hotel/room_type',
+							2: 'http://44.218.207.165:8009/hotel/room_type',
+							3: 'http://50.16.176.111:8005/hotel/room_type',
+							4: 'http://3.215.46.161:8011/hotel/room_type',
+							5: 'http://3.215.46.161:8013/hotel/room_type',
+							6: 'http://100.28.104.239:8007/hotel/room_type'
 							// Add more mappings as needed
 						}; 
 						
 						// ganti ip ketika serviceId berbeda
-						const url = serviceIdToIpMap[serviceId];
+						const url = serviceIdToIpMap[<?php echo json_encode($service_id); ?>];
+						// console.log("aaaa",url)
 						try {
-							const response = await fetch('http://3.215.46.161:8013/hotel/room_type', {
+							const response = await fetch(url, {
 								method: "GET"
 							}); // Adjust the URL as necessary
 							if (!response.ok) {
@@ -315,7 +316,8 @@
 						this.fetchRoomType();
 					}
 				}
-				const roomTypeComponent = getRoomType(serviceId);
+
+				const roomTypeComponent = getRoomType($service_id);
             	roomTypeComponent.init();
 			}
 
