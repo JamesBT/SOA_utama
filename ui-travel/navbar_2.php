@@ -9,9 +9,9 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 }
 
 ?>
-<div style="margin-left: 185px; margin-right: 185px;">
-  <nav class="nav" >
-      <div class="nav-container">
+<div >
+  <nav class="nav"style="padding:0px 0 15px 0" >
+      <div class="nav-container" style="background-color:white; padding:10px">
           <div id="header" class="header">
               <div class="header-title">
                   <a href="home.php">Company</a>
