@@ -2,9 +2,6 @@
 
 $service_id = $_GET['service_id'];
 $visit_date = $_GET['visit_date'];
-
-$api_url = 'http://localhost:8000/api/atraksi';
-
 // Read JSON file
 // $json_data = file_get_contents($api_url);
 
