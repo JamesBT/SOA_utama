@@ -225,7 +225,7 @@ $room = $_GET['room'];
                             <h2 class="text-sm text-end text-gray-400">Start Price</h2>
                             <h1 class="font-semibold text-xl text-orange-700">Rp. 200.000</h1>
                         </div>
-                        <button class="py-2 px-4 text-sm rounded bg-orange-600 hover:bg-orange-700 text-white font-semibold">Select Room</button>
+                        <button class="py-2 px-4 text-sm rounded bg-orange-600 hover:bg-orange-700 text-white font-semibold" onclick="location.href='home-hotel.php'">Select Room</button>
                     </div>
                 </div>
             </div>

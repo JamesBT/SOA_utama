@@ -316,7 +316,7 @@
                         <div class="col text-end"> <!-- text-end class aligns content to the right -->
                             <button id="bookNowBtn" type="button"
                                 style="margin-top: 1vh; margin-right: 0.5vh; font-size: 14px;" class="btn btn-primary"
-                                onclick="window.location.href='PaymentConfirmation.php';">
+                                onclick="window.location.href='home.php';">
                                 <i class="fas fa-lock" style="margin-right: 8px;"></i>
                                 PAY NOW!
                             </button>

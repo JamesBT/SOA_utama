@@ -14,7 +14,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 }
 
 ?>
-<div style="margin-left: 185px; margin-right: 185px;">
+<div>
   <nav class="nav" >
       <div class="nav-container">
           <div id="header" class="header">

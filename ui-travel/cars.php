@@ -286,7 +286,7 @@
                             <h2 class="text-sm text-end text-gray-400">From</h2>
                             <h1 class="font-semibold text-xl text-orange-700">Rp. 200.000 <span class="text-sm text-gray-400 font-normal">/day</span></h1>
                         </div>
-                        <button class="py-2 px-4 text-sm rounded bg-orange-600 hover:bg-orange-700 text-white font-semibold">Continue</button>
+                        <button class="py-2 px-4 text-sm rounded bg-orange-600 hover:bg-orange-700 text-white font-semibold" onclick="location.href='bookingCarRental.html'">Continue</button>
                     </div>
                 </div>
             </div>
