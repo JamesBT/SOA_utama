@@ -55,16 +55,22 @@
                         </div>
                         <ul id="attractionList" class="bg-white border border-gray-100 w-full mt-2 rounded top-16 absolute shadow-md hidden z-10">
                             <li class="pl-8 pr-2 py-1 border-gray-100 relative cursor-pointer hover:bg-yellow-50 hover:text-gray-900">
-                                Jatim Park 1
-                            </li>
-                            <li class="pl-8 pr-2 py-1 border-gray-100 relative cursor-pointer hover:bg-yellow-50 hover:text-gray-900">
-                                Jatim Park 2
+                                Dufan
                             </li>
                             <li class="pl-8 pr-2 py-1 border-gray-100 relative cursor-pointer hover:bg-yellow-50 hover:text-gray-900">
                                 Bali Zoo
                             </li>
                             <li class="pl-8 pr-2 py-1 border-gray-100 relative cursor-pointer hover:bg-yellow-50 hover:text-gray-900">
-                                Taman Safari Indonesia 2
+                                Waterboom
+                            </li>
+                            <li class="pl-8 pr-2 py-1 border-gray-100 relative cursor-pointer hover:bg-yellow-50 hover:text-gray-900">
+                                Sea World
+                            </li>
+                            <li class="pl-8 pr-2 py-1 border-gray-100 relative cursor-pointer hover:bg-yellow-50 hover:text-gray-900">
+                                Prambanan
+                            </li>
+                            <li class="pl-8 pr-2 py-1 border-gray-100 relative cursor-pointer hover:bg-yellow-50 hover:text-gray-900">
+                                Transtudio
                             </li>
                         </ul>
                     </div>
@@ -95,11 +101,9 @@
                     </div>
                     <div class="w-1/3 flex items-end">
                         <!-- Button search -->
-                        <a href="atraksi.php" class="w-full">
-                            <button id="gosearchatraksi" class="w-full text-white p-2 rounded bg-orange-600 hover:bg-orange-700	font-bold flex items-center justify-center gap-1"><img src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/6/68a17a4492b3b7647bb89a5a03b15de0.svg">
+                        <button id="gosearchatraksi" class="w-full text-white p-2 rounded bg-orange-600 hover:bg-orange-700	font-bold flex items-center justify-center gap-1"><img src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/6/68a17a4492b3b7647bb89a5a03b15de0.svg">
                                 <div>Search Attractions</div>
                             </button>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -168,7 +172,7 @@
             var atraksi = $('#attractioname').val();
             var city = $('#city').val();
             var tanggal = $('#tanggal').val();
-            window.location.href = `atraksi.php?city=${city}&attractioname=${atraksi}&tanggal=${tanggal}`;
+            window.location.href = `atraksi.php?city=${city}&attractioname=${atraksi}&visit_date=${tanggal}`;
         });
 
     })
