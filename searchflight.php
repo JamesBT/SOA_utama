@@ -5,20 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Search Flight</title>
-    <link rel="stylesheet" href="css/navbar.css">
 </head>
 <style>
-    html,body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-    }
-
-    body {
-      background-image: url('https://media.cnn.com/api/v1/images/stellar/prod/underscored-using-ba-avios-aa-flights-lead.jpg?q=h_1800,w_3200,x_0,y_0');
-      background-size: cover; 
-      background-position: center; 
-    }
     input[type="date"]::-webkit-inner-spin-button,
     input[type="date"]::-webkit-calendar-picker-indicator {
         display: hidden;
@@ -35,15 +23,9 @@
         background: linear-gradient(143deg, rgba(25, 50, 124, 1) 0%, rgba(42, 123, 209, 1) 56%, rgba(75, 145, 224, 1) 100%);
     }
 </style>
-<body>  
-    <?php
-        include('navbar_2.php');
-    ?>
-    <div style="padding: 70px; "></div>
-    <div style="font-size: 40px; text-align: center; overflow: hidden; padding: 10px; color: white;">Search the best flight</div>
-    <div class="padding-top:50px; margin-left: auto; margin-right: auto; ">
-        <div class="mx-auto px-4" style="width:70%;">
-        <div class="rounded-md w-full flex flex-col gap-5 bg-slate-50 p-5 shadow-md">  
+<body class="bg-sky-400">  
+    <div class="container flex items-center justify-center h-[100vh] w-full">
+        <div class="rounded-md w-[80vw] flex flex-col gap-5 bg-slate-50 p-5 shadow-md">  
             <div class="text-sky-500 font-bold">
                 Search flight
             </div>
@@ -114,7 +96,6 @@
                     
                 <!-- </a> -->
             </div>
-        </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
