@@ -253,7 +253,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="del-label">
                 <h1>Delete Account</h1>
                 <p>Once your account is deleted, you will not be able to retrieve your data. This cannot be undone.</p>
-                <div class="message"> <?php echo $error_message ?></div>
+                
             </div>
             <form class="del-form" method="post" action="edit_profile.php">
                 <div class="del-button">
