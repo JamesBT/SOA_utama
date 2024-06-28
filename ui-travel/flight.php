@@ -5,10 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
 
-     <!-- Roboto font -->
+    <!-- Roboto font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet" />
 
     <!-- Tailwind CSS config -->
     <script src="https://cdn.tailwindcss.com/3.3.0"></script>
+
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css" />
+
+    <!-- Font Awesome Icon -->
+    <script src="https://kit.fontawesome.com/e52db3bf8a.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="css/navbar.css">
 
     <title>Document</title>
 </head>
@@ -44,10 +53,17 @@
         background-color: lightgray;
         display: inline-block;
     }
+    .nav {
+        position: absolute !important;
+    }
 </style>
 <body>
-    <div class="m-5">
-        <div class="w-full rounded-md bg-gradient-custom-blue text-white p-3 ">
+    <?php
+        include('navbar_2.php');
+    ?>
+    <div style="padding:42px;"></div>
+    <div class="m-5" style="margin:auto;">
+        <div class="w-full bg-gradient-custom-blue p-2 px-5 text-white shadow-lg sticky">
             <div class="flex justify-center items-center gap-4">
                 <h1 class="text-lg font-semibold">Flight</h1>
                 <div class="rounded w-full font-semibold flex items-center justify-center backdrop-blur-sm bg-white/30 p-2 gap-3">

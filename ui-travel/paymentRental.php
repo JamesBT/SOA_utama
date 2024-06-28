@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
         </script>
-    <link rel='icon' href='../images/logo.png' type='images/logo.png'>
+    <link rel='icon' href='images/logo.png' type='images/logo.png'>
     <title>Booking.com | Payment</title>
 
     <!-- Bootstrap CSS  -->
@@ -31,7 +31,7 @@
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <link rel="stylesheet" href="../css/payment.css">
+    <link rel="stylesheet" href="css/payment.css">
 
 </head>
 <script>
@@ -171,7 +171,7 @@
                                             </div>
                                             <div class="col-6" style="padding-right: 5%; text-align:right">
                                                 <!-- <img src="../icon/visa.png" class="my-image" style="width: 20%;"> -->
-                                                <img src="../icon/mastercard.png" class="my-image" style="width: 15%;">
+                                                <img src="icon/mastercard.png" class="my-image" style="width: 15%;">
                                                 <!-- <img src="../icon/american2.png" class="my-image" style="width: 20%;">
                         <img src="../icon/jcb4.png" class="my-image" style="width: 20%;"> -->
                                             </div>
@@ -242,8 +242,8 @@
                                                 <p>Digital Payment</p>
                                             </div>
                                             <div class="col-6" style="padding-right: 5%; text-align:right">
-                                                <img src="../icon/ovo.png" class="my-image" style="width:15%;">
-                                                <img src="../icon/gopay.png" class="my-image" style="width: 25%;">
+                                                <img src="icon/ovo.png" class="my-image" style="width:15%;">
+                                                <img src="icon/gopay.png" class="my-image" style="width: 25%;">
                                             </div>
                                         </div>
                                     </button>
@@ -283,8 +283,8 @@
                                                 <p>Bank Transfer</p>
                                             </div>
                                             <div class="col-6" style="padding-right: 5%; text-align:right">
-                                                <img src="../icon/bca.png" class="my-image" style="width: 15%;">
-                                                <img src="../icon/mandiri.png" class="my-image" style="width: 15%;">
+                                                <img src="icon/bca.png" class="my-image" style="width: 15%;">
+                                                <img src="icon/mandiri.png" class="my-image" style="width: 15%;">
                                                 <!-- <img src="../icon/bri.png" class="my-image" style="width: 20%;">
                           <img src="../icon/bni.png" class="my-image" style="width: 20%;"> -->
                                             </div>

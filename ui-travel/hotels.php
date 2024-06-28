@@ -33,6 +33,7 @@ $room = $_GET['room'];
 
     <!-- Font Awesome Icon -->
     <script src="https://kit.fontawesome.com/e52db3bf8a.js" crossorigin="anonymous"></script>
+    
     <link rel="stylesheet" href="css/navbar.css">
 </head>
 
@@ -60,7 +61,7 @@ $room = $_GET['room'];
     <?php
         include('navbar_2.php');
     ?>
-    <div style="padding:48px;"></div>
+    <div style="padding:42px;"></div>
     <!-- default search -->
     <div class="w-full bg-gradient-custom-blue p-2 px-5 text-white shadow-lg sticky">
         <div class="flex justify-center items-center gap-5">
