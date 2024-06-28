@@ -63,23 +63,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     async function getRoomData() {
-        // try {
-        //     const response = await fetch(`http://107.20.145.163:8003/hotel/${service_id}/people/-/room/-/minprice/1/maxprice/-`, {
-        //         method: 'GET',
-        //     });
-        //     if (!response.ok) {
-        //         throw new Error(`HTTP error! Status: ${response.status}`);
-        //     }
-        //     const result = await response.json()
-        //     console.log(result)
-        //     provider_name.innerHTML = result.data.service_name
-        //     providerName = result.data.service_name
-        //     service_url = result.data.hotel_url
-        //     console.log(service_url)
-        //     console.log("cek")
-        // } catch (error) {
-        //     console.error('Error:', error);
-        // }
+        try {
+            const response = await fetch(`http://107.20.145.163:8003/hotel/${service_id}/people/-/room/-/minprice/1/maxprice/-`, {
+                method: 'GET',
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const result = await response.json()
+            console.log(result)
+            provider_name.innerHTML = result.data.service_name
+            providerName = result.data.service_name
+            service_url = result.data.hotel_url
+            console.log(service_url)
+            console.log("cek")
+        } catch (error) {
+            console.error('Error:', error);
+        }
 
         try {
             const urlReview = `http://3.226.141.243:8004/reviewRating/${providerName}`

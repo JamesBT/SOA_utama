@@ -7,6 +7,9 @@ async function getData() {
     const provider = document.getElementById('provider_name');
     const total_price = document.getElementById('totalPrice');
 
+    console.log(booking_code)
+    console.log(provider)
+    console.log(total_price)
 
     if (!booking_code) {
         document.body.innerHTML = '<h1>Access Denied</h1>';
@@ -14,7 +17,7 @@ async function getData() {
     }
 
     try {
-        const response = await fetch(`http://localhost:8000/bookingDetails/${booking_code}`, {
+        const response = await fetch(`http://3.226.141.243:8004/bookingDetails/${booking_code}`, {
             method: 'GET',
         });
 
@@ -22,7 +25,8 @@ async function getData() {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         var result = await response.json();
-        result = result['booking details']
+        // result = result['booking details']   
+        console.log(result)
         booking_id = result.id;
         booking_type = result.booking_type;
         console.log("result", booking_id);
@@ -463,8 +467,8 @@ function convertDateToIndonesian(dateStr) {
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    // getData();
-    // getReviewDate(booking_id, booking_type)
+    getData();
+    getReviewDate(booking_id, booking_type)
     const reviewButton = document.getElementById('review');
     reviewButton.style.display = 'none'
     const modal = document.getElementById('reviewModal');
@@ -490,7 +494,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         console.log(comment.value)
         postReview(booking_id, valueStar, comment.value)
     })
-    getReviewDate(84, 'Hotel')
+    // getReviewDate(84, 'Hotel')
 
 
 
