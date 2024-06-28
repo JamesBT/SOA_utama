@@ -27,7 +27,7 @@ digunakan oleh microservice:
 - Payment and notification
 
 pembagian tugas:
-- Fiola : membuat ui, menggabungkan ui dengan kelompok microservice lainnya
+- Fiola : membuat ui, menghubungkan ui ke api, menggabungkan ui dengan kelompok microservice lainnya
 - James : membuat api, deploy api ke aws, menggabungkan ui dengan kelompok microservice lainnya
-- Felina : membuat ui, menggabungkan ui dengan kelompok microservice lainnya
-- Jeremy : membuat ui, menggabungkan ui dengan kelompok microservice lainnya
+- Felina : menggabungkan ui dengan kelompok microservice lainnya
+- Jeremy : menggabungkan ui dengan kelompok microservice lainnya
