@@ -64,6 +64,12 @@ $room = $_GET['room'];
     <!-- default search -->
     <div class="w-full bg-gradient-custom-blue p-2 px-5 text-white shadow-lg sticky">
         <div class="flex justify-center items-center gap-5">
+            <!-- back button --> 
+            <div class="back-button absolute top-20 cursor-pointer text-gray-400 left-10">
+                <a href="searchhotel.php">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+            </div>
             <h1 class="text-lg font-semibold">Hotels</h1>
             <div class="rounded w-full backdrop-blur-sm bg-white/30 p-2 flex justify-center items-center gap-3 text-sm font-semibold"><svg width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" data-id="IcSystemMapLocationFill12">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C6 12 10.5 8.5 10.5 5.5C10.5 2.73858 8.76142 0.5 6 0.5C3.23858 0.5 1.5 2.73858 1.5 5.5C1.5 8.5 6 12 6 12ZM6 7C7.10457 7 8 6.10457 8 5C8 3.89543 7.10457 3 6 3C4.89543 3 4 3.89543 4 5C4 6.10457 4.89543 7 6 7Z" fill="#FFFFFF"></path>
@@ -82,12 +88,12 @@ $room = $_GET['room'];
                 2 People 1 Room</div>
         </div>
     </div>
-    <!-- back button --> 
+    <!-- back button 
     <div class="back-button absolute top-20 cursor-pointer text-gray-400 left-10">
         <a href="searchhotel.php">
             <i class="fa-solid fa-arrow-left"></i>
         </a>
-    </div>
+    </div> -->
     <!-- container -->
     <div class="w-3/4 m-auto mt-5">
         <!-- filters option -->
